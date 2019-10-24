@@ -1,19 +1,24 @@
 import React, { Component } from 'react';
-import { withRouter, Link } from 'react-router-dom';
-import { login } from '../API/userManager';
+import { Link, withRouter } from 'react-router-dom';
+import { register } from '../API/userManager';
 
-class Login extends Component {
+class Register extends Component {
   state = {
+    username: '',
     email: '',
     password: '',
+    confirmPassword: '',
     errors: [],
   }
 
   submit = (event) => {
     event.preventDefault();
-    login({
-      email: this.state.email,
-      password: this.state.password,
+    const { username, email, password, confirmPassword } = this.state;
+    register({
+      username,
+      email,
+      password,
+      confirmPassword,
     })
       .then((user) => {
         this.props.onLogin(user);
@@ -34,7 +39,7 @@ class Login extends Component {
   render() {
     return (
       <form onSubmit={this.submit}>
-        <h1>Login</h1>
+        <h1>Register</h1>
         <ul>
           {
             this.state.errors ? this.state.errors.map((message, i) => (
@@ -43,6 +48,17 @@ class Login extends Component {
           }
         </ul>
         <div>
+          <label htmlFor="username">
+            Username
+        </label>
+          <input
+            id="username"
+            name="username"
+            type="text"
+            required
+            onChange={this.handleInputChange} />
+        </div>
+        <div>
           <label htmlFor="email">
             Email
         </label>
@@ -50,6 +66,7 @@ class Login extends Component {
             id="email"
             name="email"
             type="email"
+            required
             placeholder="example@email.com"
             onChange={this.handleInputChange} />
         </div>
@@ -61,15 +78,27 @@ class Login extends Component {
             id="password"
             name="password"
             type="password"
+            required
             onChange={this.handleInputChange} />
         </div>
-        <button type="submit">Log in</button>
+        <div>
+          <label htmlFor="confirmPassword">
+            Confirm Password
+        </label>
+          <input
+            id="confirmPassword"
+            name="confirmPassword"
+            type="password"
+            required
+            onChange={this.handleInputChange} />
+        </div>
+        <button type="submit">Register</button>
         <p>
-          Not yet a user? <Link to="/register">Sign up</Link>
+          Already registered? <Link to="/login">Log in</Link>
         </p>
       </form>
     );
   }
 }
 
-export default withRouter(Login);
+export default withRouter(Register);

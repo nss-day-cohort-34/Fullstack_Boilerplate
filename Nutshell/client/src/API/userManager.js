@@ -10,6 +10,8 @@ export const createAuthHeaders = () => {
 
 export const getUser = () => JSON.parse(localStorage.getItem('user'));
 
+export const removeUser = () => localStorage.removeItem('user');
+
 export const login = (user) => {
   return fetch(`${baseUrl}/auth/login`, {
     method: 'POST',
