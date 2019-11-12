@@ -2,7 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.0</TargetFramework>
-    <UserSecretsId>aspnet-Nutshell-6CD26CB1-73A5-4A00-878C-7DC0F5D2CE96</UserSecretsId>
+    <UserSecretsId>aspnet-Capstone-6CD26CB1-73A5-4A00-878C-7DC0F5D2CE96</UserSecretsId>
+    <AssemblyName>Capstone</AssemblyName>
   </PropertyGroup>
 
 

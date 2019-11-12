@@ -1,7 +1,7 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace Nutshell.Migrations
+namespace Capstone.Migrations
 {
     public partial class Initial : Migration
     {

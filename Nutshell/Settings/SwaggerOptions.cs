@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Nutshell.Settings
+namespace Capstone.Settings
 {
     public class SwaggerOptions
     {

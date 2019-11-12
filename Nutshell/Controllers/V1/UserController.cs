@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using Nutshell.Interfaces;
-using Nutshell.Models.ViewModels;
-using Nutshell.Routes.V1;
+using Capstone.Interfaces;
+using Capstone.Models.ViewModels;
+using Capstone.Routes.V1;
 
-namespace Nutshell.Controllers.V1
+namespace Capstone.Controllers.V1
 {
     [ApiController]
     public class UserController : ControllerBase

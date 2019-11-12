@@ -3,20 +3,20 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Nutshell.Data;
+using Capstone.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Nutshell.Settings;
+using Capstone.Settings;
 using Microsoft.OpenApi.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
-using Nutshell.Interfaces;
-using Nutshell.Services;
-using Nutshell.Models.Data;
+using Capstone.Interfaces;
+using Capstone.Services;
+using Capstone.Models.Data;
 
-namespace Nutshell
+namespace Capstone
 {
     public class Startup
     {

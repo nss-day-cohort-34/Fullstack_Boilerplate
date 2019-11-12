@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using Nutshell.Data;
-using Nutshell.Interfaces;
-using Nutshell.Models.Data;
-using Nutshell.Models.ViewModels;
-using Nutshell.Settings;
+using Capstone.Data;
+using Capstone.Interfaces;
+using Capstone.Models.Data;
+using Capstone.Models.ViewModels;
+using Capstone.Settings;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -14,7 +14,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Nutshell.Services
+namespace Capstone.Services
 {
     public class UserService : IUserService
     {

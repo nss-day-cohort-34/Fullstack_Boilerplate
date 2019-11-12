@@ -4,9 +4,9 @@ using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Nutshell.Models.Data;
+using Capstone.Models.Data;
 
-namespace Nutshell.Data
+namespace Capstone.Data
 {
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {

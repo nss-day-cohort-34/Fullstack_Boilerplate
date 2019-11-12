@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nutshell.Models.Data
+namespace Capstone.Models.Data
 {
     public class ApplicationUser : IdentityUser
     {

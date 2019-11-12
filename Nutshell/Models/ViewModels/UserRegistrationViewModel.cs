@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nutshell.Models.ViewModels
+namespace Capstone.Models.ViewModels
 {
     public class UserRegistrationViewModel
     {

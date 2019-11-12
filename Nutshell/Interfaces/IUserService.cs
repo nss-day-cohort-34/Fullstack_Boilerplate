@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Nutshell.Models.Data;
-using Nutshell.Models.ViewModels;
+using Capstone.Models.Data;
+using Capstone.Models.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nutshell.Interfaces
+namespace Capstone.Interfaces
 {
     public interface IUserService
     {

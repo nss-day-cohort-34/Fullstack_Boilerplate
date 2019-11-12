@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Nutshell.Routes.V1;
+using Capstone.Routes.V1;
 
-namespace Nutshell.Controllers.V1
+namespace Capstone.Controllers.V1
 {
     [ApiController]
     [Authorize]

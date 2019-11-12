@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Nutshell.Helpers
+namespace Capstone.Helpers
 {
     public static class Extensions
     {
