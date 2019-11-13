@@ -1,11 +1,11 @@
 # Fullstack_Boilerplate
 
-This is starting template for .NET students who would like to make a client/server application for their final capstone. It includes basic username and password authentication. If you haven't discussed JSON Web Tokens (JWTs) in class, be sure to go over this and refresh tokens with your instructor before using this template. You will not need to worry about the implementation of the JWTs, but it _is_ important that you understand how they work on a high level to be able to use them. You might also find this [video](https://www.youtube.com/watch?v=7Q17ubqLfaM) helpful
+This is starting template for .NET students who would like to make a client/server application for their final capstone. This project includes roughly the same functionality that comes with a MVC authentication template. It includes basic username and password authentication. 
+
+If you haven't discussed JSON Web Tokens (JWTs) in class, be sure to go over this and refresh tokens with your instructor before using this template. You will not need to worry about the implementation of the JWTs, but it _is_ important that you understand how they work on a high level to be able to use them. You might also find this [video](https://www.youtube.com/watch?v=7Q17ubqLfaM) helpful
 
 
 ## What this template includes
-
-This project includes roughly the same functionality that comes with a MVC authentication template. It comes with:
 
 - React client with bare bones Login and Registration components
 - Basic ApplicationUser model
