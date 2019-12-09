@@ -18,11 +18,15 @@ class Home extends Component {
     removeUser();
   }
 
-  componentDidMount() {
+  updateSongs = () => {
     getSongs()
       .then(songs => {
         this.setState({ songs: songs });
       });
+  }
+
+  componentDidMount() {
+    this.updateSongs()
   }
 
   render() {
@@ -31,7 +35,6 @@ class Home extends Component {
       return <></>
     }
     return(
-    // this.state.user ?
     <>
     <div className="masterContainer">
       <div className="leftContainer">
@@ -39,12 +42,11 @@ class Home extends Component {
           <Header user={this.state.user} logout={this.logout}/>
         </div>
         <div>
-          <ul>
-            {
-              this.state.songs.map(songs => <li>{songs.title}</li>)
-            }
-          </ul>
-          <SideViews {...this.props}/>
+          <SideViews
+            songs={this.state.songs}
+            updateSongs={this.updateSongs}
+            {...this.props}
+          />
         </div>
       </div>
       <div className="rightContainer">
@@ -55,8 +57,6 @@ class Home extends Component {
 
     </div>
     </>
-    // :
-    // <></>
     )
   }
 
