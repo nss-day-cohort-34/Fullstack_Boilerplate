@@ -28,7 +28,9 @@ namespace Capstone.Models.ViewModels
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
-        [Display(Name = "Street Address")]
-        public string StreetAddress { get; set; }
+        [Display(Name = "City")]
+        public string City { get; set; }
+        [Display(Name = "State")]
+        public string State { get; set; }
     }
 }

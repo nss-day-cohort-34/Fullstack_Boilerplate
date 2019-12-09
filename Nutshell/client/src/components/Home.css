@@ -1,0 +1,9 @@
+.masterContainer {
+    display: flex;
+}
+.leftContainer {
+    justify-content: left;
+}
+.rightContainer {
+    justify-content: right;
+}

@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Header user={this.state.user} logout={this.logout} />
+          {!this.state.user && <Header user={this.state.user} logout={this.logout} />}
           <Route exact path="/login" render={() => (
             <Login onLogin={(user) => this.setState({ user })} />
           )} />

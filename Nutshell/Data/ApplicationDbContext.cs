@@ -16,5 +16,12 @@ namespace Capstone.Data
         }
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         public DbSet<RefreshToken> RefreshToken { get; set; }
+        public DbSet<CowriterSongRel> CowriterSongRels { get; set; }
+        public DbSet<Reference> References { get; set; }
+        public DbSet<Song> Songs { get; set; }
+        public DbSet<SongWordRel> SongWordRels { get; set; }
+        public DbSet<Title> Titles { get; set; }
+        public DbSet<TypeOfReference> TypeOfReferences { get; set; }
+        public DbSet<Word> Words { get; set; }
     }
 }
