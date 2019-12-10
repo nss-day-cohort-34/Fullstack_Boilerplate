@@ -10,29 +10,26 @@ using Capstone.Models.Data;
 using Microsoft.AspNetCore.Authorization;
 using Capstone.Routes.V1;
 using Microsoft.AspNetCore.Identity;
+using Capstone.Helpers;
 
 namespace Capstone.Controllers.V1
 {
+    [Authorize]
     [ApiController]
     public class SongsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
-
-        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
-
-        public SongsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public SongsController(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         // GET: api/Songs
         [HttpGet(Api.Songs.GetSongs)]
         public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            return await _context.Songs.Where(s => s.InProgress == true).ToListAsync();
+            var userId = HttpContext.GetUserId();
+            return await _context.Songs.Where(s => s.InProgress == true && s.UserId == userId).ToListAsync();
         }
 
         // GET: api/Songs/5
@@ -48,6 +45,8 @@ namespace Capstone.Controllers.V1
 
             return song;
         }
+    }
+}
 
         //// PUT: api/Songs/5
         //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
@@ -113,5 +112,3 @@ namespace Capstone.Controllers.V1
         //{
         //    return _context.Songs.Any(e => e.Id == id);
         //}
-    }
-}

@@ -9,3 +9,7 @@
     justify-content: right;
     flex-basis: 70%;
 }
+
+.makeMainBig {
+    height: 900px;
+}

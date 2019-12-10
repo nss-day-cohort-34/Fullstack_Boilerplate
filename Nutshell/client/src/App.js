@@ -12,20 +12,23 @@ class App extends Component {
     user: getUser(),
   }
 
-
+  logout = () => {
+    this.setState({ user: null });
+    removeUser();
+  }
 
   render() {
     return (
       <div className="App">
         <Router>
-          {!this.state.user && <Header />}
+          <Header user={this.state.user} logout={this.logout} />
           <Route exact path="/login" render={() => (
             <Login onLogin={(user) => this.setState({ user })} />
           )} />
           <Route exact path="/register" render={() => (
             <Register onLogin={(user) => this.setState({ user })} />
           )} />
-          <Route path="/" render={() => {
+          <Route exact path="/" render={() => {
             return this.state.user ? (
               <Home />
             ) : <Redirect to="/login" />

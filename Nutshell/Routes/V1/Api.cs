@@ -21,6 +21,16 @@ namespace Capstone.Routes.V1
             public const string GetSongs = Base + "/Songs";
             public const string GetSong = Base + "/Songs/{id}";
         }
+        public static class Words
+        {
+            public const string GetWords = Base + "/Words";
+            public const string GetWord = Base + "/Words/{id}";
+        }
+        public static class Titles
+        {
+            public const string GetTitles = Base + "/Titles";
+            public const string GetTitle = Base + "/Titles/{id}";
+        }
 
         public static class User
         {
