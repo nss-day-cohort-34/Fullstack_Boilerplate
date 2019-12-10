@@ -7,11 +7,11 @@ class SideViews extends Component {
   render() {
     return (
       <>
-        <Route exact path="/songs" render={props => {
+        <Route path="/songs" render={props => {
         return <SongList 
         songs={this.props.songs}
         updateSongs={this.props.updateSongs}
-        {...this.props} 
+        {...this.props}
         />
         }} />
       </>

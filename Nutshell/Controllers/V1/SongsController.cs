@@ -9,6 +9,7 @@ using Capstone.Data;
 using Capstone.Models.Data;
 using Microsoft.AspNetCore.Authorization;
 using Capstone.Routes.V1;
+using Microsoft.AspNetCore.Identity;
 
 namespace Capstone.Controllers.V1
 {
@@ -16,17 +17,22 @@ namespace Capstone.Controllers.V1
     public class SongsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public SongsController(ApplicationDbContext context)
+        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
+
+        public SongsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: api/Songs
         [HttpGet(Api.Songs.GetSongs)]
         public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
         {
-            return await _context.Songs.ToListAsync();
+            var user = await _userManager.GetUserAsync(HttpContext.User);
+            return await _context.Songs.Where(s => s.InProgress == true).ToListAsync();
         }
 
         // GET: api/Songs/5
