@@ -17,6 +17,14 @@ class SongDetails extends Component {
         getSongById(songId).then(song => this.setState({title: song.title, lyrics: song.lyrics}))
     }
 
+    componentDidUpdate(oldProps) {
+        const songId = parseInt(this.props.match.params.songId)
+        const oldPropSongId = parseInt(oldProps.match.params.songId)
+        if (oldPropSongId !== songId) {
+            getSongById(songId).then(song => this.setState({title: song.title, lyrics: song.lyrics}))
+        }
+    }
+
 
     render() {    
         const songId = parseInt(this.props.match.params.songId)

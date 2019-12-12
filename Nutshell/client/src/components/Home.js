@@ -139,6 +139,7 @@ class Home extends Component {
           <Sidebar.Pusher>
               <div className="makeMainBig">LYRICS | FIRST</div>
               <MainViews
+              words={this.state.words}
               songs={this.state.songs} 
               {...this.props}
               />

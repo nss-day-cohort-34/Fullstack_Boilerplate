@@ -18,7 +18,7 @@ class Login extends Component {
     })
       .then((user) => {
         this.props.onLogin(user);
-        this.props.history.push('/');
+        this.props.history.push('/home');
       })
       .catch(err => {
         this.setState({ errors: err.messages });

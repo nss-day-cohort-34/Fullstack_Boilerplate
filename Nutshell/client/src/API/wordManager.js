@@ -11,5 +11,9 @@ export const getWords = () => {
 };
 
 export const getWordById = (id) => {
-    return fetch(`${baseUrl}/words/${id}`)
+    const authHeader = createAuthHeaders()
+    return fetch(`${baseUrl}/words/${id}`, {
+        headers: authHeader
+    })
+    .then(response => response.json())
 }

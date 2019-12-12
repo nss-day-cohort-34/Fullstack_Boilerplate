@@ -1,7 +1,8 @@
 ﻿import React, { Component } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { getSongs, getSongById } from '../../API/songManager';
+import { createSong } from '../../API/songManager';
 import Song from '../MainView/Song/SongDetails'
+import { Button } from 'semantic-ui-react'
 
 //Rework this file (copy of Home.js) to do crud functionality on songs.
 
@@ -15,10 +16,12 @@ class SongList extends Component {
         else {
             return (
                 <>
-
-                    {this.props.songs.map(song => {
-                        return (
-                            <Link to={`/home/songs/${song.id}`}>
+                        <Button onClick={() => { this.props.history.push(`/home/songs/create`) }}>Create New Song</Button>
+                        {this.props.songs.map(song => {
+                            return (
+                            <Link 
+                            key={song.id}
+                            to={`/home/songs/${song.id}`}>
                                 {song.title}
                             </Link>
                         )

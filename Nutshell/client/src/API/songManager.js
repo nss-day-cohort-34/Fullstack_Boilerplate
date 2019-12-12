@@ -19,11 +19,22 @@ export const getSongById = (id) => {
     .then(response => response.json())
 }
 
+export const createSong = (song) => {
+    const authHeader = createAuthHeaders()
+    return fetch(`${baseUrl}/songs/create`, {
+        headers: authHeader,
+        method: 'POST',
+        body: JSON.stringify(song)
+    }
+)
+}
+
 export const editSong = (id, song) => {
     const authHeader = createAuthHeaders()
     return fetch(`${baseUrl}/songs/edit/${id}`, {
         headers: authHeader,
-        method: 'PUT'
-    })
-    .then(response => response.json())
+        method: 'PUT',
+        body: JSON.stringify(song)
+    }
+)
 }
