@@ -1,20 +1,15 @@
 import React, { Component, FormattedMessage } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { getSongs, getWordById, editWord } from '../../../API/wordManager';
+import { createWord } from '../../../API/wordManager';
 import { Button } from 'semantic-ui-react'
+import { getDefinition } from '../../../API/thirdPartyApiManager'
 
 
-class WordEdit extends Component {
+class WordCreate extends Component {
 
     state = {
         name: "",
-        definition: "",
-        wordId: 0
-    }
-
-    componentDidMount() {
-        const wordId = parseInt(this.props.match.params.wordId)
-        getWordById(wordId).then(word => this.setState({name: word.name, definition: word.definition, wordId: wordId}))
+        definition: ""
     }
 
     handleFieldChange = evt => {
@@ -25,18 +20,26 @@ class WordEdit extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
-        const foundWord = this.props.words.find(w => w.id === this.state.wordId)
-        foundWord.name = this.state.name
-        foundWord.definition = this.state.definition
-        editWord(this.state.wordId, foundWord).then(() => this.props.history.push(`/home/words/${this.state.wordId}`)) 
+        const newWord = {
+            name: this.state.name,
+            definition: this.state.definition,
+            userId: null
+        }
+        createWord(newWord) 
+    }
+    
+    handleDefinitionSearch = event => {
+        event.preventDefault()
+        getDefinition(this.state.name).then(d => this.setState({definition: d.entries[0].lexemes[0].senses[0].definition}))
     }
 
     render() {
         return (
             <>
-                <h1>Edit Word</h1>
+                <h1>New Word</h1>
                 <label htmlFor="">Word Name</label>
                 <input type="text" id="name" onChange={this.handleFieldChange} value={this.state.name}></input>
+                <Button onClick={this.handleDefinitionSearch}>Search Definition</Button>
                 <p></p>
                 <label htmlFor="">Definition</label>
                 <textarea rows="15" cols="45" type="text" id="definition" onChange={this.handleFieldChange} value={this.state.definition}></textarea>
@@ -46,4 +49,4 @@ class WordEdit extends Component {
     }
 }
 
-export default WordEdit;
+export default WordCreate;

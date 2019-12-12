@@ -28,6 +28,7 @@ class SongCreate extends Component {
         createSong(newSong) 
     }
 
+
     render() {
         return (
             <>
@@ -37,7 +38,7 @@ class SongCreate extends Component {
                 <p></p>
                 <label htmlFor="">Lyrics</label>
                 <textarea rows="15" cols="45" type="text" id="lyrics" onChange={this.handleFieldChange} value={this.state.lyrics}></textarea>
-                <Button outline color="dark" size="sm" onClick={this.handleSubmit}>Save</Button>
+                <Button onClick={this.handleSubmit}>Save</Button>
             </>
         )
     }

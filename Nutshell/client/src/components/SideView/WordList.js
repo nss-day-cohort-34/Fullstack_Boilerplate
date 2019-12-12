@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import { Link, Route } from 'react-router-dom';
-import { getSongs, getSongById } from '../../API/songManager';
-import Song from '../MainView/Song/SongDetails'
+import { Link } from 'react-router-dom';
 import { Button } from 'semantic-ui-react'
 
 
@@ -21,7 +19,9 @@ class WordList extends Component {
                         <Button onClick={() => { this.props.history.push(`/home/words/create`) }}>New Word</Button>
                         {this.props.words.map(word => {
                         return (
-                            <Link to={`/home/words/${word.id}`}>
+                            <Link 
+                            key={word.id}
+                            to={`/home/words/${word.id}`}>
                                 {word.name}
                             </Link>
                         )

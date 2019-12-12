@@ -17,3 +17,23 @@ export const getWordById = (id) => {
     })
     .then(response => response.json())
 }
+
+export const createWord = (word) => {
+    const authHeader = createAuthHeaders()
+    return fetch(`${baseUrl}/words/create`, {
+        headers: authHeader,
+        method: 'POST',
+        body: JSON.stringify(word)
+    }
+)
+}
+
+export const editWord = (id, word) => {
+    const authHeader = createAuthHeaders()
+    return fetch(`${baseUrl}/words/edit/${id}`, {
+        headers: authHeader,
+        method: 'PUT',
+        body: JSON.stringify(word)
+    }
+)
+}

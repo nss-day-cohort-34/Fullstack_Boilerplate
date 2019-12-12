@@ -5,6 +5,7 @@ import SongEdit from "./Song/SongEdit";
 import SongCreate from "./Song/SongCreate";
 import WordDetails from "./Word/WordDetails";
 import WordEdit from "./Word/WordEdit";
+import WordCreate from "./Word/WordCreate";
 
 export default class MainViews extends Component {
 
@@ -42,6 +43,12 @@ export default class MainViews extends Component {
         <Route exact path="/home/words/:wordId(\d+)/edit" render={(props) => {
           return <WordEdit
           key={this.props.words.id}
+          words={this.props.words}
+          updateWords={this.updateWords}
+          {...props} />
+          }} />
+          <Route exact path="/home/words/create" render={(props) => {
+          return <WordCreate
           words={this.props.words}
           updateWords={this.updateWords}
           {...props} />
