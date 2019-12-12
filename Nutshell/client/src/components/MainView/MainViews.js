@@ -1,18 +1,27 @@
 import { Route } from "react-router-dom";
 import React, { Component } from "react";
-import Song from "./Song";
+import SongDetails from "./Song/SongDetails";
+import SongEdit from "./Song/SongEdit";
 
 export default class MainViews extends Component {
 
   render() {
     return (
       <>
-        <Route exact path="/songs/:Id(\d+)" render={props => {
-        return <Song 
-        songs={this.props.songs}
-        updateSongs={this.updateSongs}
-        {...this.props} />
-        }} />
+        <Route exact path="/home/songs/:songId(\d+)" render={(props) => {
+          return <SongDetails 
+          key={this.props.songs.id}
+          songs={this.props.songs}
+          updateSongs={this.updateSongs}
+          {...props} />
+          }} />
+        <Route exact path="/home/songs/:songId(\d+)/edit" render={(props) => {
+          return <SongEdit
+          key={this.props.songs.id}
+          songs={this.props.songs}
+          updateSongs={this.updateSongs}
+          {...props} />
+          }} />
       </>
     );
   }

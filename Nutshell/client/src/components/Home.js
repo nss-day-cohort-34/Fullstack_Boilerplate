@@ -137,55 +137,16 @@ class Home extends Component {
             />}
           </Sidebar>
           <Sidebar.Pusher>
-              <div className="makeMainBig">Put The Main Views Here</div>
-              <MainViews />
+              <div className="makeMainBig">LYRICS | FIRST</div>
+              <MainViews
+              songs={this.state.songs} 
+              {...this.props}
+              />
           </Sidebar.Pusher>
         </Sidebar.Pushable >
       </>
     )
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    // if (this.state.songs.length === 0) {
-    //   return <></>
-    // }
-    // return (
-    //   <>
-    //     <div className="masterContainer">
-    //       <div className="leftContainer">
-    //         <div>
-    //           <SongList
-    //             songs={this.state.songs}
-    //             updateSongs={this.updateSongs}
-    //             {...this.props}
-    //           />
-    //         </div>
-    //       </div>
-    //       <div className="rightContainer">
-    //         <div>
-    //           <MainViews
-    //             songs={this.state.songs}
-    //             updateSongs={this.updateSongs}
-    //             {...this.props}
-    //           />
-    //         </div>
-    //       </div>
-
-    //     </div>
-    //   </>
-    // )
   }
 
 }

@@ -45,70 +45,69 @@ namespace Capstone.Controllers.V1
 
             return song;
         }
+
+        // PUT: api/Songs/5
+        [HttpPut(Api.Songs.PutSong)]
+        public async Task<IActionResult> PutSong(int id, Song song)
+        {
+            if (id != song.Id)
+            {
+                return BadRequest();
+            }
+
+            _context.Entry(song).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!SongExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+        private bool SongExists(int id)
+        {
+            return _context.Songs.Any(e => e.Id == id);
+        }
     }
 }
 
-        //// PUT: api/Songs/5
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //// more details see https://aka.ms/RazorPagesCRUD.
-        //[HttpPut("{id}")]
-        //public async Task<IActionResult> PutSong(int id, Song song)
-        //{
-        //    if (id != song.Id)
-        //    {
-        //        return BadRequest();
-        //    }
+//// POST: api/Songs
+//// To protect from overposting attacks, please enable the specific properties you want to bind to, for
+//// more details see https://aka.ms/RazorPagesCRUD.
+//[HttpPost]
+//public async Task<ActionResult<Song>> PostSong(Song song)
+//{
+//    _context.Songs.Add(song);
+//    await _context.SaveChangesAsync();
 
-        //    _context.Entry(song).State = EntityState.Modified;
+//    return CreatedAtAction("GetSong", new { id = song.Id }, song);
+//}
 
-        //    try
-        //    {
-        //        await _context.SaveChangesAsync();
-        //    }
-        //    catch (DbUpdateConcurrencyException)
-        //    {
-        //        if (!SongExists(id))
-        //        {
-        //            return NotFound();
-        //        }
-        //        else
-        //        {
-        //            throw;
-        //        }
-        //    }
+//// DELETE: api/Songs/5
+//[HttpDelete("{id}")]
+//public async Task<ActionResult<Song>> DeleteSong(int id)
+//{
+//    var song = await _context.Songs.FindAsync(id);
+//    if (song == null)
+//    {
+//        return NotFound();
+//    }
 
-        //    return NoContent();
-        //}
+//    _context.Songs.Remove(song);
+//    await _context.SaveChangesAsync();
 
-        //// POST: api/Songs
-        //// To protect from overposting attacks, please enable the specific properties you want to bind to, for
-        //// more details see https://aka.ms/RazorPagesCRUD.
-        //[HttpPost]
-        //public async Task<ActionResult<Song>> PostSong(Song song)
-        //{
-        //    _context.Songs.Add(song);
-        //    await _context.SaveChangesAsync();
+//    return song;
+//}
 
-        //    return CreatedAtAction("GetSong", new { id = song.Id }, song);
-        //}
 
-        //// DELETE: api/Songs/5
-        //[HttpDelete("{id}")]
-        //public async Task<ActionResult<Song>> DeleteSong(int id)
-        //{
-        //    var song = await _context.Songs.FindAsync(id);
-        //    if (song == null)
-        //    {
-        //        return NotFound();
-        //    }
-
-        //    _context.Songs.Remove(song);
-        //    await _context.SaveChangesAsync();
-
-        //    return song;
-        //}
-
-        //private bool SongExists(int id)
-        //{
-        //    return _context.Songs.Any(e => e.Id == id);
-        //}
