@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { login } from '../API/userManager';
+import Header from './Header';
 
 class Login extends Component {
   state = {
@@ -17,7 +18,7 @@ class Login extends Component {
     })
       .then((user) => {
         this.props.onLogin(user);
-        this.props.history.push('/');
+        this.props.history.push('/home');
       })
       .catch(err => {
         this.setState({ errors: err.messages });
@@ -33,6 +34,8 @@ class Login extends Component {
 
   render() {
     return (
+      <>
+      <Header user={this.props.user}/>
       <form onSubmit={this.submit}>
         <h1>Login</h1>
         <ul>
@@ -68,6 +71,7 @@ class Login extends Component {
           Not yet a user? <Link to="/register">Sign up</Link>
         </p>
       </form>
+      </>
     );
   }
 }

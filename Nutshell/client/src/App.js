@@ -28,9 +28,11 @@ class App extends Component {
           <Route exact path="/register" render={() => (
             <Register onLogin={(user) => this.setState({ user })} />
           )} />
-          <Route exact path="/" render={() => {
+          <Route path="/home" render={props => {
             return this.state.user ? (
-              <Home />
+              <Home 
+              {...props}
+              />
             ) : <Redirect to="/login" />
           }} />
         </Router>

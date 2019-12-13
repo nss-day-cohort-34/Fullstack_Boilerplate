@@ -1,0 +1,15 @@
+.masterContainer {
+    display: flex;
+}
+.leftContainer {
+    justify-content: left;
+    flex-basis: 30%;
+}
+.rightContainer {
+    justify-content: right;
+    flex-basis: 70%;
+}
+
+.makeMainBig {
+    height: 300px;
+}
