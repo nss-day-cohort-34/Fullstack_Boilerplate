@@ -24,8 +24,8 @@ export const createWord = (word) => {
         headers: authHeader,
         method: 'POST',
         body: JSON.stringify(word)
-    }
-)
+    })
+    .then(response => response.json())
 }
 
 export const editWord = (id, word) => {
@@ -34,6 +34,5 @@ export const editWord = (id, word) => {
         headers: authHeader,
         method: 'PUT',
         body: JSON.stringify(word)
-    }
-)
+    })
 }

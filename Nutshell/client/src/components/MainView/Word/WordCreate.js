@@ -2,14 +2,15 @@ import React, { Component, FormattedMessage } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { createWord } from '../../../API/wordManager';
 import { Button } from 'semantic-ui-react'
-import { getDefinition } from '../../../API/thirdPartyApiManager'
+import { getWordInformation } from '../../../API/thirdPartyApiManager'
 
 
 class WordCreate extends Component {
 
     state = {
         name: "",
-        definition: ""
+        definition: "",
+        synonyms: []
     }
 
     handleFieldChange = evt => {
@@ -25,12 +26,22 @@ class WordCreate extends Component {
             definition: this.state.definition,
             userId: null
         }
-        createWord(newWord) 
+        createWord(newWord).then(w => {
+            this.props.updateWords()
+            this.props.history.push(`/home/words/${w.id}`)
+        })
     }
     
     handleDefinitionSearch = event => {
         event.preventDefault()
-        getDefinition(this.state.name).then(d => this.setState({definition: d.entries[0].lexemes[0].senses[0].definition}))
+        getWordInformation(this.state.name).then(w => {
+            this.setState({definition: w.entries[0].lexemes[0].senses[0].definition})
+            if (w.entries[0].lexemes[0].synonymSets != undefined){
+                this.setState({synonyms: w.entries[0].lexemes[0].synonymSets[0].synonyms})
+            } else {
+                this.setState({synonyms: []})
+            }
+        })
     }
 
     render() {
@@ -43,6 +54,11 @@ class WordCreate extends Component {
                 <p></p>
                 <label htmlFor="">Definition</label>
                 <textarea rows="15" cols="45" type="text" id="definition" onChange={this.handleFieldChange} value={this.state.definition}></textarea>
+                <label htmlFor="">Synonyms</label>
+                <textarea rows="15" cols="45" type="text" id="synonyms" onChange={this.handleFieldChange} value={this.state.synonyms}></textarea>
+                {this.state.synonyms.forEach(s => {
+                    return <p>{s}</p>
+                })}
                 <Button onClick={this.handleSubmit}>Save</Button>
             </>
         )

@@ -11,10 +11,11 @@ using Microsoft.AspNetCore.Authorization;
 using Capstone.Routes.V1;
 using Microsoft.AspNetCore.Identity;
 using Capstone.Helpers;
+using Capstone.Models.ViewModels;
 
 namespace Capstone.Controllers.V1
 {
-    //[Authorize]
+    [Authorize]
     [ApiController]
     public class WordsController : ControllerBase
     {
@@ -79,14 +80,22 @@ namespace Capstone.Controllers.V1
         }
         // POST: api/Songs
         [HttpPost(Api.Words.PostWord)]
-        public async Task<ActionResult<Word>> PostWord(Word word)
+        public async Task<ActionResult<Word>> PostWord(WordCreateViewModel wcvm)
         {
+            Word newWord = new Word
+            {
+                Name = wcvm.Name,
+                Definition = wcvm.Definition,
+                UserId = HttpContext.GetUserId()
+            };
 
-            word.UserId = HttpContext.GetUserId();
-            _context.Words.Add(word);
+            _context.Words.Add(newWord);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetWord", new { id = word.Id }, word);
+            var foundWord = _context.Words.Where(w => w.UserId == newWord.UserId).OrderByDescending(w => w.Id).Take(1);
+
+
+            return Ok(foundWord);
 
         }
         private bool WordExists(int id)
