@@ -17,7 +17,6 @@ namespace Capstone.Models.Data
         public bool InProgress { get; set; }
         [Required]
         public string UserId { get; set; }
-        [Required]
         public ApplicationUser User { get; set; }
         public Song()
         {

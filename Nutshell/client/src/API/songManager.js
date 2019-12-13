@@ -25,8 +25,8 @@ export const createSong = (song) => {
         headers: authHeader,
         method: 'POST',
         body: JSON.stringify(song)
-    }
-)
+    })
+    .then(response => response.json())
 }
 
 export const editSong = (id, song) => {
@@ -35,6 +35,15 @@ export const editSong = (id, song) => {
         headers: authHeader,
         method: 'PUT',
         body: JSON.stringify(song)
+    }
+)
+}
+
+export const deleteSong = (id) => {
+    const authHeader = createAuthHeaders()
+    return fetch(`${baseUrl}/songs/delete/${id}`, {
+        headers: authHeader,
+        method: 'DELETE'
     }
 )
 }

@@ -140,7 +140,9 @@ class Home extends Component {
               <div className="makeMainBig">LYRICS | FIRST</div>
               <MainViews
               words={this.state.words}
-              songs={this.state.songs} 
+              updateWords={this.updateWords}
+              songs={this.state.songs}
+              updateSongs={this.updateSongs}
               {...this.props}
               />
           </Sidebar.Pusher>

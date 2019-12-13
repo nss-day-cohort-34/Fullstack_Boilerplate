@@ -17,40 +17,40 @@ export default class MainViews extends Component {
           return <SongDetails 
           key={this.props.songs.id}
           songs={this.props.songs}
-          updateSongs={this.updateSongs}
+          updateSongs={this.props.updateSongs}
           {...props} />
           }} />
         <Route exact path="/home/songs/:songId(\d+)/edit" render={(props) => {
           return <SongEdit
           key={this.props.songs.id}
           songs={this.props.songs}
-          updateSongs={this.updateSongs}
+          updateSongs={this.props.updateSongs}
           {...props} />
           }} />
         <Route exact path="/home/songs/create" render={(props) => {
           return <SongCreate
           songs={this.props.songs}
-          updateSongs={this.updateSongs}
+          updateSongs={this.props.updateSongs}
           {...props} />
           }} />
         <Route exact path="/home/words/:wordId(\d+)" render={(props) => {
           return <WordDetails 
           key={this.props.words.id}
           words={this.props.words}
-          updateWords={this.updateWords}
+          updateWords={this.props.updateWords}
           {...props} />
           }} />
         <Route exact path="/home/words/:wordId(\d+)/edit" render={(props) => {
           return <WordEdit
           key={this.props.words.id}
           words={this.props.words}
-          updateWords={this.updateWords}
+          updateWords={this.props.updateWords}
           {...props} />
           }} />
           <Route exact path="/home/words/create" render={(props) => {
           return <WordCreate
           words={this.props.words}
-          updateWords={this.updateWords}
+          updateWords={this.props.updateWords}
           {...props} />
           }} />
       </>

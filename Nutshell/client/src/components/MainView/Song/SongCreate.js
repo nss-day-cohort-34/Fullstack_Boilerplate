@@ -22,11 +22,12 @@ class SongCreate extends Component {
         event.preventDefault()
         const newSong = {
             title: this.state.title,
-            lyrics: this.state.lyrics,
-            userId: null
+            lyrics: this.state.lyrics
         }
-        createSong(newSong) 
-    }
+        createSong(newSong).then(s => {
+            this.props.updateSongs()
+            this.props.history.push(`/home/songs/${s.id}`)
+        })}
 
 
     render() {

@@ -10,29 +10,27 @@ using Capstone.Models.Data;
 using Microsoft.AspNetCore.Authorization;
 using Capstone.Routes.V1;
 using Microsoft.AspNetCore.Identity;
+using Capstone.Helpers;
 
 namespace Capstone.Controllers.V1
 {
+    //[Authorize]
     [ApiController]
     public class WordsController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<ApplicationUser> _userManager;
 
-        private Task<ApplicationUser> GetCurrentUserAsync() => _userManager.GetUserAsync(HttpContext.User);
-
-        public WordsController(ApplicationDbContext context, UserManager<ApplicationUser> userManager)
+        public WordsController(ApplicationDbContext context)
         {
             _context = context;
-            _userManager = userManager;
         }
 
         // GET: api/Words
         [HttpGet(Api.Words.GetWords)]
         public async Task<ActionResult<IEnumerable<Word>>> GetWords()
         {
-            var user = await _userManager.GetUserAsync(HttpContext.User);
-            return await _context.Words.ToListAsync();
+            var userId = HttpContext.GetUserId();
+            return await _context.Words.Where(w => w.UserId == userId).ToListAsync();
         }
 
         // GET: api/Words/5
@@ -47,6 +45,53 @@ namespace Capstone.Controllers.V1
             }
 
             return word;
+        }
+        // PUT: api/Songs/5
+        [HttpPut(Api.Words.PutWord)]
+        public async Task<IActionResult> PutWord(int id, Word word)
+        {
+            if (id != word.Id)
+            {
+                return BadRequest();
+            }
+
+            var userId = HttpContext.GetUserId();
+            word.UserId = userId;
+            _context.Entry(word).State = EntityState.Modified;
+
+            try
+            {
+                await _context.SaveChangesAsync();
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!WordExists(id))
+                {
+                    return NotFound();
+                }
+                else
+                {
+                    throw;
+                }
+            }
+
+            return NoContent();
+        }
+        // POST: api/Songs
+        [HttpPost(Api.Words.PostWord)]
+        public async Task<ActionResult<Word>> PostWord(Word word)
+        {
+
+            word.UserId = HttpContext.GetUserId();
+            _context.Words.Add(word);
+            await _context.SaveChangesAsync();
+
+            return CreatedAtAction("GetWord", new { id = word.Id }, word);
+
+        }
+        private bool WordExists(int id)
+        {
+            return _context.Songs.Any(e => e.Id == id);
         }
     }
 }
