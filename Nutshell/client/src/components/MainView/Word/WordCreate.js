@@ -35,11 +35,18 @@ class WordCreate extends Component {
     handleDefinitionSearch = event => {
         event.preventDefault()
         getWordInformation(this.state.name).then(w => {
-            this.setState({definition: w.entries[0].lexemes[0].senses[0].definition})
-            if (w.entries[0].lexemes[0].synonymSets != undefined){
-                this.setState({synonyms: w.entries[0].lexemes[0].synonymSets[0].synonyms})
-            } else {
-                this.setState({synonyms: []})
+            if (w.entries.length > 0) {
+                console.log(w)
+                this.setState({definition: w.entries[0].lexemes[0].senses[0].definition})
+                if (w.entries[0].lexemes[0].synonymSets != undefined){
+                    this.setState({synonyms: w.entries[0].lexemes[0].synonymSets[0].synonyms})
+                } else {
+                    this.setState({synonyms: []})
+                }
+            }
+            else{
+                console.log("not a recognized word")
+                this.setState({name: "", definition: "", synonyms: []})
             }
         })
     }

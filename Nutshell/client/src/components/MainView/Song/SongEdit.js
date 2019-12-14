@@ -2,7 +2,7 @@ import React, { Component, FormattedMessage } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { getSongs, getSongById, editSong } from '../../../API/songManager';
 import { Button } from 'semantic-ui-react'
-import "./Song.css"
+import "./SongEdit.css"
 
 
 class SongEdit extends Component {
@@ -35,13 +35,13 @@ class SongEdit extends Component {
     render() {
         return (
             <>
-                <h1>Edit Song</h1>
-                <label htmlFor="">Song Name</label>
-                <input type="text" id="title" onChange={this.handleFieldChange} value={this.state.title}></input>
+                <input className="songTitle" type="text" id="title" autoComplete="off" onChange={this.handleFieldChange} value={this.state.title}></input>
                 <p></p>
-                <label htmlFor="">Lyrics</label>
-                <textarea rows="15" cols="45" type="text" id="lyrics" onChange={this.handleFieldChange} value={this.state.lyrics}></textarea>
+                <textarea className="songLyrics" rows="28" cols="75" type="text" id="lyrics" onChange={this.handleFieldChange} value={this.state.lyrics}></textarea>
+                <p></p>
+                <div className="saveButton">
                 <Button onClick={this.handleSubmit}>Save</Button>
+                </div>
             </>
         )
     }

@@ -35,7 +35,6 @@ class Login extends Component {
   render() {
     return (
       <>
-      <Header user={this.props.user}/>
       <form onSubmit={this.submit}>
         <h1>Login</h1>
         <ul>

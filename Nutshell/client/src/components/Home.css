@@ -1,3 +1,37 @@
+.navBar {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.showButton {
+    background: none !important;
+}
+
+.helloLogout {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logo {
+    width: 300px;
+}
+
+.catalogueListButton {
+    background: none !important;
+}
+
+.wordListButton {
+    background: none !important;
+}
+
+.titleListButton {
+    background: none !important;
+}
+
+.referenceListButton {
+    background: none !important;
+}
+
 .masterContainer {
     display: flex;
 }
@@ -9,7 +43,7 @@
     justify-content: right;
     flex-basis: 70%;
 }
-
+/* 
 .makeMainBig {
     height: 300px;
-}
+} */
