@@ -37,11 +37,11 @@ class SongEdit extends Component {
             <>
                 <input className="songTitle" type="text" id="title" autoComplete="off" onChange={this.handleFieldChange} value={this.state.title}></input>
                 <p></p>
-                <textarea className="songLyrics" rows="28" cols="75" type="text" id="lyrics" onChange={this.handleFieldChange} value={this.state.lyrics}></textarea>
-                <p></p>
-                <div className="saveButton">
-                <Button onClick={this.handleSubmit}>Save</Button>
+                <div>
+                <Button className="saveButton" onClick={this.handleSubmit}>Save</Button>
                 </div>
+                <textarea className="songLyrics" rows="29" cols="75" type="text" id="lyrics" onChange={this.handleFieldChange} value={this.state.lyrics}></textarea>
+                <p></p>
             </>
         )
     }
