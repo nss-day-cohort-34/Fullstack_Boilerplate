@@ -30,6 +30,7 @@ namespace Capstone.Routes.V1
             public const string GetWord = Base + "/Words/{id}";
             public const string PutWord = Base + "/Words/Edit/{id}";
             public const string PostWord = Base + "/Words/Create";
+            public const string DeleteWord = Base + "/Words/Delete/{id}";
         }
         public static class Titles
         {

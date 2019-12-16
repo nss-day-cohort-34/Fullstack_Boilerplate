@@ -9,6 +9,7 @@ import TitleList from './SideView/TitleList';
 import MainViews from './MainView/MainViews';
 import { Button, Header, Form, Icon, Sidebar, Menu } from 'semantic-ui-react';
 import "./Home.css";
+import Logo from "./LyricsFirstLogoCapture.png"
 
 class Home extends Component {
   state = {
@@ -54,36 +55,40 @@ class Home extends Component {
   }
 
   showCatalogueOnClick = () => {
-    this.setState({ 
+    this.setState({
       showCatalogue: true,
       showWords: false,
       showTitles: false,
       showReferences: false
-    })}
+    })
+  }
 
   showWordsOnClick = () => {
-    this.setState({ 
+    this.setState({
       showCatalogue: false,
       showWords: true,
       showTitles: false,
       showReferences: false
-    })}
+    })
+  }
 
   showTitlesOnClick = () => {
-    this.setState({ 
+    this.setState({
       showCatalogue: false,
       showWords: false,
       showTitles: true,
       showReferences: false
-    })}
+    })
+  }
 
   showReferencesOnClick = () => {
-    this.setState({ 
+    this.setState({
       showCatalogue: false,
       showWords: false,
       showTitles: false,
       showReferences: true
-    })}
+    })
+  }
 
   render() {
     const { visible } = this.state
@@ -95,6 +100,9 @@ class Home extends Component {
               ? "delete"
               : "bars"} />
           </Button>
+          <div className="logoContainer">
+              <div className="logo">Lyrics | First</div>
+            </div>
         </nav>
         < Sidebar.Pushable >
           <Sidebar
@@ -106,14 +114,20 @@ class Home extends Component {
             visible={visible}
           // width='medium'
           >
+            <div className="helloLogout">
+              <div>
+                Hello {this.props.user.username}
+              </div>
+              <Button onClick={this.props.logout}>Logout</Button>
+            </div>
             <nav>
-              <span><Button onClick={this.showCatalogueOnClick}>Catalogue</Button></span>
+              <span><Button className="catalogueListButton" onClick={this.showCatalogueOnClick}>Catalogue</Button></span>
               <span>|</span>
-              <span><Button onClick={this.showWordsOnClick}>Words</Button></span>
+              <span><Button className="wordListButton" onClick={this.showWordsOnClick}>Words</Button></span>
               <span>|</span>
-              <span><Button onClick={this.showTitlesOnClick}>Titles</Button></span>
+              <span><Button className="titleListButton" onClick={this.showTitlesOnClick}>Titles</Button></span>
               <span>|</span>
-              <span><Button onClick={this.showReferencesOnClick}>References</Button></span>
+              <span><Button className="referenceListButton" onClick={this.showReferencesOnClick}>References</Button></span>
             </nav>
             {this.state.showCatalogue && <SongList
               updateSongs={this.updateSongs}
@@ -136,15 +150,16 @@ class Home extends Component {
               {...this.props}
             />}
           </Sidebar>
-          <Sidebar.Pusher>
-              <div className="makeMainBig">LYRICS | FIRST</div>
-              <MainViews
+          <Sidebar.Pusher onClick={this.state.visible === true ? this.handleClick : undefined}>
+
+            <div className="makeMainBig"></div>
+            <MainViews
               words={this.state.words}
               updateWords={this.updateWords}
               songs={this.state.songs}
               updateSongs={this.updateSongs}
               {...this.props}
-              />
+            />
           </Sidebar.Pusher>
         </Sidebar.Pushable >
       </>

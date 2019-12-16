@@ -1,6 +1,6 @@
 import {apiToken} from '../apiToken'
 
-export const getDefinition = word => {
+export const getWordInformation = word => {
     return fetch(`https://lingua-robot.p.rapidapi.com/language/v1/entries/en/${word}`, {
         "headers": {
             "x-rapidapi-host": "lingua-robot.p.rapidapi.com",

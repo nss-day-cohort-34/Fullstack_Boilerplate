@@ -6,12 +6,16 @@ import SongCreate from "./Song/SongCreate";
 import WordDetails from "./Word/WordDetails";
 import WordEdit from "./Word/WordEdit";
 import WordCreate from "./Word/WordCreate";
+import HomeView from "./HomeView";
+import "./MainView.css"
 
 export default class MainViews extends Component {
 
   render() {
     return (
       <>
+      <div className="mainContainer">
+
         <Route exact path="/home/songs/:songId(\d+)" render={(props) => {
           console.log("details view firing")
           return <SongDetails 
@@ -19,20 +23,20 @@ export default class MainViews extends Component {
           songs={this.props.songs}
           updateSongs={this.props.updateSongs}
           {...props} />
-          }} />
+        }} />
         <Route exact path="/home/songs/:songId(\d+)/edit" render={(props) => {
           return <SongEdit
           key={this.props.songs.id}
           songs={this.props.songs}
           updateSongs={this.props.updateSongs}
           {...props} />
-          }} />
+        }} />
         <Route exact path="/home/songs/create" render={(props) => {
           return <SongCreate
           songs={this.props.songs}
           updateSongs={this.props.updateSongs}
           {...props} />
-          }} />
+        }} />
         <Route exact path="/home/words/:wordId(\d+)" render={(props) => {
           return <WordDetails 
           key={this.props.words.id}
@@ -46,13 +50,18 @@ export default class MainViews extends Component {
           words={this.props.words}
           updateWords={this.props.updateWords}
           {...props} />
-          }} />
+        }} />
           <Route exact path="/home/words/create" render={(props) => {
-          return <WordCreate
-          words={this.props.words}
-          updateWords={this.props.updateWords}
-          {...props} />
+            return <WordCreate
+            words={this.props.words}
+            updateWords={this.props.updateWords}
+            {...props} />
           }} />
+          <Route exact path="/home/lyricsFirst" render={(props) => {
+            return <HomeView
+            {...props} />
+          }} />
+          </div>
       </>
     );
   }

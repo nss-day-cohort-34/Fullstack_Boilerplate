@@ -16,7 +16,6 @@ namespace Capstone.Models.Data
         public string Definition { get; set; }
         [Required]
         public string UserId { get; set; }
-        [Required]
         public ApplicationUser User { get; set; }
     }
 }

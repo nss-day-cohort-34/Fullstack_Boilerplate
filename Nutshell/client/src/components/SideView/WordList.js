@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { Button } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
+import "./WordList.css"
 
 
 //Rework this file (copy of Home.js) to do crud functionality on songs.
@@ -16,14 +17,16 @@ class WordList extends Component {
             return (
                 <>
 
-                        <Button onClick={() => { this.props.history.push(`/home/words/create`) }}>New Word</Button>
+                        <Button className="createButton" onClick={() => { this.props.history.push(`/home/words/create`) }}><Icon name="add"/></Button>
                         {this.props.words.map(word => {
                         return (
-                            <Link 
-                            key={word.id}
-                            to={`/home/words/${word.id}`}>
-                                {word.name}
-                            </Link>
+                            <div className="wordList">
+                                <Link 
+                                key={word.id}
+                                to={`/home/words/${word.id}`}>
+                                    {word.name}
+                                </Link>
+                            </div>
                         )
                     })}
 

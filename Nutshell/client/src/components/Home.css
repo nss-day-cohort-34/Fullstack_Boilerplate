@@ -1,3 +1,47 @@
+.navBar {
+    display: flex;
+    justify-content: space-between;
+}
+
+.showButton {
+    background: none !important;
+}
+
+.helloLogout {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.logoContainer {
+    display: flex;
+    justify-content: center;
+}
+
+.logo {
+    margin-top: 20px;
+    margin-right: 20px;
+    font-family: 'Playfair Display', serif;
+    color: #5d5d5d;
+    font-weight: 100;
+    font-size: 30px;
+}
+
+.catalogueListButton {
+    background: none !important;
+}
+
+.wordListButton {
+    background: none !important;
+}
+
+.titleListButton {
+    background: none !important;
+}
+
+.referenceListButton {
+    background: none !important;
+}
+
 .masterContainer {
     display: flex;
 }
@@ -10,6 +54,6 @@
     flex-basis: 70%;
 }
 
-.makeMainBig {
-    height: 300px;
-}
+/* .makeMainBig {
+    min-height: 400px;
+} */

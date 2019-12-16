@@ -21,7 +21,7 @@ class App extends Component {
     return (
       <div className="App">
         <Router>
-          <Header user={this.state.user} logout={this.logout} />
+          {this.state.user === null && <Header user={this.state.user} logout={this.logout} />}
           <Route exact path="/login" render={() => (
             <Login onLogin={(user) => this.setState({ user })} />
           )} />
@@ -31,6 +31,8 @@ class App extends Component {
           <Route path="/home" render={props => {
             return this.state.user ? (
               <Home 
+              user={this.state.user}
+              logout={this.logout}
               {...props}
               />
             ) : <Redirect to="/login" />

@@ -1,0 +1,27 @@
+.wordName {
+    color: #5d5d5d;
+    font-size: 50px;
+    font-family: 'Playfair Display', serif;
+    margin: 50px;
+    margin-top: 100px;
+}
+
+.definitionContainer {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
+.definition {
+    color: #5d5d5d;
+    font-size: 20px;
+    font-family: 'Playfair Display', serif;
+    font-weight: 900;
+}
+
+.definitionOfWord {
+    color: #5d5d5d;
+    font-size: 20px;
+    font-family: 'Roboto', sans-serif;
+    padding-left: 20px
+}
