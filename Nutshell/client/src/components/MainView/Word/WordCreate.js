@@ -47,7 +47,7 @@ class WordCreate extends Component {
             }
             else{
                 console.log("not a recognized word")
-                this.setState({name: "", definition: "", synonyms: []})
+                this.setState({definition: "", synonyms: []})
             }
         })
     }
@@ -55,7 +55,7 @@ class WordCreate extends Component {
     render() {
         return (
             <>
-                <input className="wordNameCreate" type="text" id="name" placeholder="search new word" autoComplete="off" onChange={this.handleFieldChange} value={this.state.name}></input>
+                <input className="wordNameCreate" type="text" id="name" placeholder="new word" autoComplete="off" onChange={this.handleFieldChange} value={this.state.name}></input>
                 <Button className="searchButton ui massive" onClick={this.handleDefinitionSearch}><Icon name="search"/></Button>
                 <p></p>
                 <Button className="searchButton ui massive" onClick={this.handleSubmit}><Icon name="save"/></Button>
