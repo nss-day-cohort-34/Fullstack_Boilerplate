@@ -1,0 +1,13 @@
+.titleNameCreate {
+    height: 100px;
+    width: 45%;
+    font-size: 50px;
+    text-align: center;
+    background-color: #f1ebe6;
+    border: none;
+    outline: none;
+    font-family: 'Playfair Display', serif;
+    color: #5d5d5d;
+    margin-top: 60px;
+    margin-bottom: 8px;
+}

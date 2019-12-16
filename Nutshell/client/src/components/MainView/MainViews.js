@@ -3,6 +3,9 @@ import React, { Component } from "react";
 import SongDetails from "./Song/SongDetails";
 import SongEdit from "./Song/SongEdit";
 import SongCreate from "./Song/SongCreate";
+import TitleDetails from "./Title/TitleDetails";
+import TitleEdit from "./Title/TitleEdit";
+import TitleCreate from "./Title/TitleCreate";
 import WordDetails from "./Word/WordDetails";
 import WordEdit from "./Word/WordEdit";
 import WordCreate from "./Word/WordCreate";
@@ -57,6 +60,46 @@ export default class MainViews extends Component {
             updateWords={this.props.updateWords}
             {...props} />
           }} />
+        <Route exact path="/home/titles/:titleId(\d+)" render={(props) => {
+          return <TitleDetails 
+          key={this.props.titles.id}
+          titles={this.props.titles}
+          updateTitles={this.props.updateTitles}
+          {...props} />
+          }} />
+        <Route exact path="/home/titles/:titleId(\d+)/edit" render={(props) => {
+          return <TitleEdit
+          key={this.props.titles.id}
+          titles={this.props.titles}
+          updateTitles={this.props.updateTitles}
+          {...props} />
+        }} />
+          <Route exact path="/home/titles/create" render={(props) => {
+            return <TitleCreate
+            titles={this.props.titles}
+            updateTitles={this.props.updateTitles}
+            {...props} />
+          }} />
+        {/* <Route exact path="/home/references/:titleId(\d+)" render={(props) => {
+          return <ReferenceDetails 
+          key={this.props.references.id}
+          references={this.props.references}
+          updateReferences={this.props.updateReferences}
+          {...props} />
+          }} />
+        <Route exact path="/home/references/:titleId(\d+)/edit" render={(props) => {
+          return <ReferenceEdit
+          key={this.props.references.id}
+          references={this.props.references}
+          updateReferences={this.props.updateReferences}
+          {...props} />
+        }} />
+          <Route exact path="/home/references/create" render={(props) => {
+            return <ReferenceCreate
+            references={this.props.references}
+            updateReferences={this.props.updateReferences}
+            {...props} />
+          }} /> */}
           <Route exact path="/home/lyricsFirst" render={(props) => {
             return <HomeView
             {...props} />

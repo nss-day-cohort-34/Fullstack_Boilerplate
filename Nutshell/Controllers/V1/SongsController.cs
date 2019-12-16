@@ -97,10 +97,6 @@ namespace Capstone.Controllers.V1
                 return Ok(foundSong);
 
         }
-        private bool SongExists(int id)
-        {
-            return _context.Songs.Any(e => e.Id == id);
-        }
 
         // DELETE: api/Songs/5
         [HttpDelete(Api.Songs.DeleteSong)]
@@ -116,6 +112,10 @@ namespace Capstone.Controllers.V1
             await _context.SaveChangesAsync();
 
             return song;
+        }
+        private bool SongExists(int id)
+        {
+            return _context.Songs.Any(e => e.Id == id);
         }
     }
 }
