@@ -6,6 +6,7 @@ import SongCreate from "./Song/SongCreate";
 import WordDetails from "./Word/WordDetails";
 import WordEdit from "./Word/WordEdit";
 import WordCreate from "./Word/WordCreate";
+import HomeView from "./HomeView";
 import "./MainView.css"
 
 export default class MainViews extends Component {
@@ -54,6 +55,10 @@ export default class MainViews extends Component {
             return <WordCreate
             words={this.props.words}
             updateWords={this.props.updateWords}
+            {...props} />
+          }} />
+          <Route exact path="/home/lyricsFirst" render={(props) => {
+            return <HomeView
             {...props} />
           }} />
           </div>

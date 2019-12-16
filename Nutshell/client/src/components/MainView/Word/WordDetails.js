@@ -1,14 +1,16 @@
 import React, { Component, FormattedMessage  } from 'react';
 import { Link, Route } from 'react-router-dom';
-import { getWords, getWordById } from '../../../API/wordManager';
-import { Button } from 'semantic-ui-react'
+import { getWords, getWordById, deleteWord } from '../../../API/wordManager';
+import { Button, Icon, Modal } from 'semantic-ui-react'
+import "./WordDetails.css"
 
 
 class WordDetails extends Component {
 
     state = {
         name: "",
-        definition: ""
+        definition: "",
+        showDeleteModal: false
     }
 
     componentDidMount() {
@@ -24,19 +26,40 @@ class WordDetails extends Component {
         }
     }
 
+    handleDeleteWord = id => {
+        deleteWord(id)
+            .then(() => {
+                this.props.updateWords()
+            })
+        this.props.history.push(`/home/lyricsFirst`)
+    }
+
+    openDeleteModal = () => this.setState({ showDeleteModal: true })
+    closeDeleteModal = () => this.setState({ showDeleteModal: false })
+
 
     render() {    
         const wordId = parseInt(this.props.match.params.wordId)
                 return (
                     <>
                         <div>
-                            {this.state.name}
+                            <div className="wordName">
+                                {this.state.name}                                
+                            </div>
                         </div>
-                        <div>
-                            {this.state.definition}
+                        <div className="definitionContainer">
+                            <div className="definition">
+                                Definition:
+                            </div>
+                            <div className="definitionOfWord">
+                                {this.state.definition}
+                            </div>
                         </div>
-                        <Button onClick={() => { this.props.history.push(`/home/words/${wordId}/edit`) }}>Edit</Button>
-                        <Button>Delete</Button>
+                        <Button className="deleteButton" onClick={() => { this.props.history.push(`/home/words/${wordId}/edit`) }}><Icon name="edit"/></Button>
+                        <Modal onClose={this.closeDeleteModal} onOpen={this.openDeleteModal} open={this.state.showDeleteModal} trigger={<Button className="deleteButton"><Icon name="trash alternate outline" /></Button>} closeIcon>
+                            <Modal.Header className="deleteModal">Delete "{this.state.name}"?</Modal.Header>
+                            <Button attached onClick={() => this.handleDeleteWord(wordId)}>Delete</Button>
+                        </Modal>
                     </>
                 )
     }

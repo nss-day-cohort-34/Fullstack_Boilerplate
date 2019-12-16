@@ -98,6 +98,22 @@ namespace Capstone.Controllers.V1
             return Ok(foundWord);
 
         }
+
+        // DELETE: api/Words/5
+        [HttpDelete(Api.Words.DeleteWord)]
+        public async Task<ActionResult<Word>> DeleteWord(int id)
+        {
+            var word = await _context.Words.FindAsync(id);
+            if (word == null)
+            {
+                return NotFound();
+            }
+
+            _context.Words.Remove(word);
+            await _context.SaveChangesAsync();
+
+            return word;
+        }
         private bool WordExists(int id)
         {
             return _context.Songs.Any(e => e.Id == id);

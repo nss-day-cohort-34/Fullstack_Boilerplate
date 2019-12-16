@@ -31,7 +31,7 @@ class SongDetails extends Component {
             .then(() => {
                 this.props.updateSongs()
             })
-        this.props.history.push(`/home`)
+        this.props.history.push(`/home/lyricsFirst`)
     }
 
     openDeleteModal = () => this.setState({ showDeleteModal: true })

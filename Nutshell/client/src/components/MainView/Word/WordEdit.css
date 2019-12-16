@@ -1,4 +1,4 @@
-.songTitle {
+.wordNameEdit {
     height: 100px;
     width: 80%;
     font-size: 50px;
@@ -12,16 +12,18 @@
     margin-bottom: 8px;
 }
 
-.songLyrics {
+.definitionContainerEdit {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.definitionEdit {
     resize: none;
+    font-family: 'Roboto', sans-serif;
 }
 
 .saveButton {
     margin: 10px;
     background: none !important;
-}
-
-.saveAndConnect {
-    display: flex;
-    justify-content: space-evenly;
 }

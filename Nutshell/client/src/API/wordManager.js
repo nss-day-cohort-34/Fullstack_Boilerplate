@@ -36,3 +36,12 @@ export const editWord = (id, word) => {
         body: JSON.stringify(word)
     })
 }
+
+export const deleteWord = (id) => {
+    const authHeader = createAuthHeaders()
+    return fetch(`${baseUrl}/words/delete/${id}`, {
+        headers: authHeader,
+        method: 'DELETE'
+    }
+)
+}

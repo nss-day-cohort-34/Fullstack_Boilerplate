@@ -103,9 +103,6 @@ class Home extends Component {
           <div className="logoContainer">
               <div className="logo">Lyrics | First</div>
             </div>
-            <Button className="showButton ui massive">
-            <Icon name="user" />
-          </Button>
         </nav>
         < Sidebar.Pushable >
           <Sidebar
@@ -155,7 +152,7 @@ class Home extends Component {
           </Sidebar>
           <Sidebar.Pusher onClick={this.state.visible === true ? this.handleClick : undefined}>
 
-            {/* <div className="makeMainBig"><img className="logo" src={Logo}/></div> */}
+            <div className="makeMainBig"></div>
             <MainViews
               words={this.state.words}
               updateWords={this.updateWords}

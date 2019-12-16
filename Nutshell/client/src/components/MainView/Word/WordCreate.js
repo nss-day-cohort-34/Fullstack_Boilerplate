@@ -1,8 +1,9 @@
 import React, { Component, FormattedMessage } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { createWord } from '../../../API/wordManager';
-import { Button } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import { getWordInformation } from '../../../API/thirdPartyApiManager'
+import "./WordCreate.css"
 
 
 class WordCreate extends Component {
@@ -54,19 +55,17 @@ class WordCreate extends Component {
     render() {
         return (
             <>
-                <h1>New Word</h1>
-                <label htmlFor="">Word Name</label>
-                <input type="text" id="name" onChange={this.handleFieldChange} value={this.state.name}></input>
-                <Button onClick={this.handleDefinitionSearch}>Search Definition</Button>
+                <input className="wordNameCreate" type="text" id="name" placeholder="search new word" autoComplete="off" onChange={this.handleFieldChange} value={this.state.name}></input>
+                <Button className="searchButton ui massive" onClick={this.handleDefinitionSearch}><Icon name="search"/></Button>
                 <p></p>
-                <label htmlFor="">Definition</label>
-                <textarea rows="15" cols="45" type="text" id="definition" onChange={this.handleFieldChange} value={this.state.definition}></textarea>
-                <label htmlFor="">Synonyms</label>
-                <textarea rows="15" cols="45" type="text" id="synonyms" onChange={this.handleFieldChange} value={this.state.synonyms}></textarea>
+                <Button className="searchButton ui massive" onClick={this.handleSubmit}><Icon name="save"/></Button>
+                <p></p>
+                <textarea className="definitionCreate" rows="15" cols="45" type="text" id="definition" placeholder="definition" onChange={this.handleFieldChange} value={this.state.definition}></textarea>
+                <p></p>
+                <textarea readOnly className ="synonymsCreate" rows="15" cols="45" type="text" id="synonyms" onChange={this.handleFieldChange} value={this.state.synonyms}></textarea>
                 {this.state.synonyms.forEach(s => {
                     return <p>{s}</p>
                 })}
-                <Button onClick={this.handleSubmit}>Save</Button>
             </>
         )
     }
