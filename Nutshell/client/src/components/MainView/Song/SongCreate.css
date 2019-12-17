@@ -22,3 +22,12 @@
     margin: 10px;
     background: none !important;
 }
+
+.popupContent {
+    overflow: scroll;
+    height: 60%;
+}
+
+.popup {
+    
+}

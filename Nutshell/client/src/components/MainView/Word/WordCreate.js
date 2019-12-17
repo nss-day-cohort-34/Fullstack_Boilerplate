@@ -3,6 +3,7 @@ import { Link, Route } from 'react-router-dom';
 import { createWord } from '../../../API/wordManager';
 import { Button, Icon } from 'semantic-ui-react'
 import { getWordInformation } from '../../../API/thirdPartyApiManager'
+import { debounce } from "debounce";
 import "./WordCreate.css"
 
 
@@ -14,9 +15,9 @@ class WordCreate extends Component {
         synonyms: []
     }
 
-    handleFieldChange = evt => {
+    handleFieldChange = event => {
         const stateToChange = {}
-        stateToChange[evt.target.id] = evt.target.value
+        stateToChange[event.target.id] = event.target.value
         this.setState(stateToChange)
     }
 
@@ -24,7 +25,8 @@ class WordCreate extends Component {
         event.preventDefault()
         const newWord = {
             name: this.state.name,
-            definition: this.state.definition
+            definition: this.state.definition,
+            visable: true
         }
         createWord(newWord).then(w => {
             console.log(w)
@@ -33,30 +35,31 @@ class WordCreate extends Component {
         })
     }
     
-    handleDefinitionSearch = event => {
+    handleDefinitionSearch = debounce(event => {
         event.preventDefault()
-        getWordInformation(this.state.name).then(w => {
-            if (w.entries.length > 0) {
-                console.log(w)
-                this.setState({definition: w.entries[0].lexemes[0].senses[0].definition})
-                if (w.entries[0].lexemes[0].synonymSets != undefined){
-                    this.setState({synonyms: w.entries[0].lexemes[0].synonymSets[0].synonyms})
-                } else {
-                    this.setState({synonyms: []})
+        if (this.state.name.length > 0) {
+            getWordInformation(this.state.name).then(w => {
+                if (w.entries.length > 0) {
+                    console.log(w)
+                    this.setState({definition: w.entries[0].lexemes[0].senses[0].definition})
+                    if (w.entries[0].lexemes[0].synonymSets != undefined){
+                        this.setState({synonyms: w.entries[0].lexemes[0].synonymSets[0].synonyms})
+                    } else {
+                        this.setState({synonyms: []})
+                    }
                 }
-            }
-            else{
-                console.log("not a recognized word")
-                this.setState({definition: "", synonyms: []})
-            }
-        })
-    }
+                else{
+                    console.log("not a recognized word")
+                    this.setState({definition: "", synonyms: []})
+                }
+            })
+        }
+    }, 2000)
 
     render() {
         return (
             <>
-                <input className="wordNameCreate" type="text" id="name" placeholder="new word" autoComplete="off" onChange={this.handleFieldChange} value={this.state.name}></input>
-                <Button className="searchButton ui massive" onClick={this.handleDefinitionSearch}><Icon name="search"/></Button>
+                <input className="wordNameCreate" type="text" id="name" placeholder="new word" autoComplete="off" onChange={this.handleFieldChange} onKeyUp={this.handleDefinitionSearch} value={this.state.name}></input>
                 <p></p>
                 <Button className="searchButton ui massive" onClick={this.handleSubmit}><Icon name="save"/></Button>
                 <p></p>

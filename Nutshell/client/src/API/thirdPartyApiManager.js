@@ -11,3 +11,8 @@ export const getWordInformation = word => {
         return response.json()
     })
 }
+
+export const getAllRhymingWords = word => {
+    return fetch(`https://api.datamuse.com/words?rel_rhy=${word}`)
+        .then(resp => resp.json())
+}

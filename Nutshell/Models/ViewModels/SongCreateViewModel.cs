@@ -9,5 +9,6 @@ namespace Capstone.Models.ViewModels
     {
         public string Title { get; set; }
         public string Lyrics { get; set; }
+        public bool Visable { get; set; }
     }
 }

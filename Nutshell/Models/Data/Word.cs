@@ -15,6 +15,8 @@ namespace Capstone.Models.Data
         [Required]
         public string Definition { get; set; }
         [Required]
+        public bool Visable { get; set; }
+        [Required]
         public string UserId { get; set; }
         public ApplicationUser User { get; set; }
     }
