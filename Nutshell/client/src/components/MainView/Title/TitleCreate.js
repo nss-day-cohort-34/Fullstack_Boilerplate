@@ -22,9 +22,9 @@ class TitleCreate extends Component {
         const newTitle = {
             name: this.state.name,
         }
-        createTitle(newTitle).then(w => {
+        createTitle(newTitle).then(t => {
             this.props.updateTitles()
-            this.props.history.push(`/home/titles/${w.id}`)
+            this.props.history.push(`/home/titles/${t[0].id}`)
         })
     }
 

@@ -22,7 +22,7 @@ class Register extends Component {
     })
       .then((user) => {
         this.props.onLogin(user);
-        this.props.history.push('/home');
+        this.props.history.push('/home/lyricsFirst');
       })
       .catch(err => {
         this.setState({ errors: err.messages });

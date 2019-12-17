@@ -92,6 +92,7 @@ namespace Capstone.Controllers.V1
             {
                 Name = rcvm.Name,
                 Url = rcvm.Url,
+                TypeOfReferenceId = rcvm.TypeOfReferenceId,
                 UserId = HttpContext.GetUserId()
             };
 

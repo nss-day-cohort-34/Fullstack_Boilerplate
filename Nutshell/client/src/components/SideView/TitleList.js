@@ -11,7 +11,11 @@ class TitleList extends Component {
 
     render() {
         if (this.props.titles.length === 0) {
-            return <></>
+            return (
+            <>
+                <Button className="createButton" onClick={() => { this.props.history.push(`/home/titles/create`) }}><Icon name="add" /></Button>
+            </>
+            )
         }
         else {
             return (
