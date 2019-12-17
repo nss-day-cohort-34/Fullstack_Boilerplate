@@ -27,7 +27,7 @@ class SongCreate extends Component {
         }
         createSong(newSong).then(s => {
             this.props.updateSongs()
-            this.props.history.push(`/home/songs/${s.id}`)
+            this.props.history.push(`/home/songs/${s[0].id}`)
         })}
 
 

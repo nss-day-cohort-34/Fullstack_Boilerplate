@@ -11,10 +11,14 @@ namespace Capstone.Routes.V1
         internal const string Version = "v1";
         internal const string Base = Root + "/" + Version;
 
-        public static class Values
+        public static class References
         {
-            public const string GetAll = Base + "/Values";
-            public const string Get = Base + "/Values/{id}";
+            public const string GetReferenceTypes = Base + "/ReferenceTypes";
+            public const string GetReferences = Base + "/References";
+            public const string GetReference = Base + "/References/{id}";
+            public const string PutReference = Base + "/References/Edit/{id}";
+            public const string PostReference = Base + "/References/Create";
+            public const string DeleteReference = Base + "/References/Delete/{id}";
         }
         public static class Songs
         {
@@ -36,6 +40,9 @@ namespace Capstone.Routes.V1
         {
             public const string GetTitles = Base + "/Titles";
             public const string GetTitle = Base + "/Titles/{id}";
+            public const string PutTitle = Base + "/Titles/Edit/{id}";
+            public const string PostTitle = Base + "/Titles/Create";
+            public const string DeleteTitle = Base + "/Titles/Delete/{id}";
         }
 
         public static class User

@@ -24,12 +24,12 @@ class WordCreate extends Component {
         event.preventDefault()
         const newWord = {
             name: this.state.name,
-            definition: this.state.definition,
-            userId: null
+            definition: this.state.definition
         }
         createWord(newWord).then(w => {
+            console.log(w)
             this.props.updateWords()
-            this.props.history.push(`/home/words/${w.id}`)
+            this.props.history.push(`/home/words/${w[0].id}`)
         })
     }
     

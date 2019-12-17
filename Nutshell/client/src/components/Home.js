@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { getSongs, getSongById } from '../API/songManager';
 import { getWords, getWordById } from '../API/wordManager';
 import { getTitles, getTitleById } from '../API/titleManager';
+import { getReferences, getReferenceTypes } from '../API/referenceManager';
 import SideViews from './SideView/SideViews';
 import SongList from './SideView/SongList';
 import WordList from './SideView/WordList';
 import TitleList from './SideView/TitleList';
+import ReferenceTypeList from './SideView/ReferenceTypeList';
 import MainViews from './MainView/MainViews';
 import { Button, Header, Form, Icon, Sidebar, Menu } from 'semantic-ui-react';
 import "./Home.css";
@@ -16,6 +18,8 @@ class Home extends Component {
     songs: [],
     words: [],
     titles: [],
+    references: [],
+    referenceTypes: [],
     visible: false,
     showCatalogue: false,
     showWords: false,
@@ -44,10 +48,26 @@ class Home extends Component {
       });
   }
 
+  updateReferences = () => {
+    getReferences()
+      .then(references => {
+        this.setState({ references: references });
+      });
+  }
+
+  updateReferenceTypes = () => {
+    getReferenceTypes()
+      .then(referenceTypes => {
+        this.setState({ referenceTypes: referenceTypes });
+      });
+  }
+
   componentDidMount() {
     this.updateSongs()
     this.updateWords()
     this.updateTitles()
+    this.updateReferences()
+    this.updateReferenceTypes()
   }
 
   handleClick = () => {
@@ -144,9 +164,10 @@ class Home extends Component {
               titles={this.state.titles}
               {...this.props}
             />}
-            {this.state.showReferences && <SongList
-              updateSongs={this.updateSongs}
-              songs={this.state.songs}
+            {this.state.showReferences && <ReferenceTypeList
+              updateReferences={this.updateReferences}
+              referenceTypes={this.state.referenceTypes}
+              references={this.state.references}
               {...this.props}
             />}
           </Sidebar>
@@ -158,6 +179,11 @@ class Home extends Component {
               updateWords={this.updateWords}
               songs={this.state.songs}
               updateSongs={this.updateSongs}
+              titles={this.state.titles}
+              updateTitles={this.updateTitles}
+              references={this.state.references}
+              updateReferences={this.updateReferences}
+              referenceTypes={this.state.referenceTypes}
               {...this.props}
             />
           </Sidebar.Pusher>

@@ -12,7 +12,11 @@ class SongList extends Component {
 
     render() {
         if (this.props.songs.length === 0) {
-            return <></>
+            return (
+            <>
+                <Button className="createButton" onClick={() => { this.props.history.push(`/home/songs/create`) }}><Icon name="plus"/></Button>          
+            </>
+            )
         }
         else {
             return (

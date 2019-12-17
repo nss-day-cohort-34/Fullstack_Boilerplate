@@ -1,0 +1,7 @@
+﻿INSERT INTO [References] ([Name], Url, TypeOfReferenceId, UserId) VALUES ('Midnight In Paris', 'https://www.imdb.com/title/tt1605783/', 1, '42575810-e159-4853-9c0f-9fc87dcec6c2')
+INSERT INTO [References] ([Name], Url, TypeOfReferenceId, UserId) VALUES ('1984', 'https://en.wikipedia.org/wiki/Nineteen_Eighty-Four', 5, '42575810-e159-4853-9c0f-9fc87dcec6c2')
+INSERT INTO [References] ([Name], Url, TypeOfReferenceId, UserId) VALUES ('Irises', 'https://www.vangoghgallery.com/painting/irisesindex.html', 4, '42575810-e159-4853-9c0f-9fc87dcec6c2')
+INSERT INTO [References] ([Name], Url, TypeOfReferenceId, UserId) VALUES ('The Promenade', 'https://www.marcchagall.net/the-promenade.jsp', 4, '42575810-e159-4853-9c0f-9fc87dcec6c2')
+INSERT INTO [References] ([Name], Url, TypeOfReferenceId, UserId) VALUES ('Annie Hall', 'https://www.imdb.com/title/tt0075686/', 1, '42575810-e159-4853-9c0f-9fc87dcec6c2')
+INSERT INTO [References] ([Name], Url, TypeOfReferenceId, UserId) VALUES ('I Want You', 'https://www.youtube.com/watch?v=Rb0jsseh9J8', 3, '42575810-e159-4853-9c0f-9fc87dcec6c2')
+INSERT INTO [References] ([Name], Url, TypeOfReferenceId, UserId) VALUES ('Aristocats', 'https://www.imdb.com/title/tt0065421/', 1, '865f9ef4-4687-4da9-8f8f-14599a19c581')

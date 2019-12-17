@@ -1,0 +1,9 @@
+.createButton {
+    background: none !important;
+}
+
+.referenceTypeList {
+    text-align: left !important;
+    padding-left: 20px;
+    padding-top: 20px;
+}

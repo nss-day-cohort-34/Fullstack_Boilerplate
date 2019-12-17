@@ -11,19 +11,23 @@ class WordList extends Component {
 
     render() {
         if (this.props.words.length === 0) {
-            return <></>
+            return (
+            <>
+                <Button className="createButton" onClick={() => { this.props.history.push(`/home/words/create`) }}><Icon name="add" /></Button>
+            </>
+            )
         }
         else {
             return (
                 <>
 
-                        <Button className="createButton" onClick={() => { this.props.history.push(`/home/words/create`) }}><Icon name="add"/></Button>
-                        {this.props.words.map(word => {
+                    <Button className="createButton" onClick={() => { this.props.history.push(`/home/words/create`) }}><Icon name="add" /></Button>
+                    {this.props.words.map(word => {
                         return (
                             <div className="wordList">
-                                <Link 
-                                key={word.id}
-                                to={`/home/words/${word.id}`}>
+                                <Link
+                                    key={word.id}
+                                    to={`/home/words/${word.id}`}>
                                     {word.name}
                                 </Link>
                             </div>
