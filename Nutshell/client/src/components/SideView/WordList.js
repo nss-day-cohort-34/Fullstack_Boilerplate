@@ -24,9 +24,8 @@ class WordList extends Component {
                     <Button className="createButton" onClick={() => { this.props.history.push(`/home/words/create`) }}><Icon name="add" /></Button>
                     {this.props.words.map(word => {
                         return (
-                            <div className="wordList">
+                            <div className="wordList" key={word.id}>
                                 <Link
-                                    key={word.id}
                                     to={`/home/words/${word.id}`}>
                                     {word.name}
                                 </Link>

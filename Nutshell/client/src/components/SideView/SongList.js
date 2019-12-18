@@ -24,9 +24,8 @@ class SongList extends Component {
                         <Button className="createButton" onClick={() => { this.props.history.push(`/home/songs/create`) }}><Icon name="plus"/></Button>
                         {this.props.songs.map(song => {
                             return (
-                                <div className="songList">
+                                <div className="songList" key={song.id}>
                                     <Link 
-                                    key={song.id}
                                     to={`/home/songs/${song.id}`}>
                                         {song.title}
                                     </Link>

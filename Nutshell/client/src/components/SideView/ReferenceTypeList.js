@@ -47,7 +47,7 @@ class ReferenceList extends Component {
                             console.log(references)
                             return (
 
-                                <Accordion className="referenceTypeList">
+                                <Accordion className="referenceTypeList" key={referenceType.id}>
                                     <Accordion.Title
                                         active={activeIndex === i}
                                         index={i}
@@ -60,9 +60,8 @@ class ReferenceList extends Component {
                                         {references.map(r => {
                                             console.log(r)
                                             return (
-                                                <div className="referenceList">
+                                                <div className="referenceList" key={r.id}>
                                                     <Link
-                                                        key={r.id}
                                                         to={`/home/references/${r.id}`}>
                                                         {r.name}
                                                     </Link>

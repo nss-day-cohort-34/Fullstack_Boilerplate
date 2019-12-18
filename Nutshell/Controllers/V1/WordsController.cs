@@ -33,6 +33,13 @@ namespace Capstone.Controllers.V1
             var userId = HttpContext.GetUserId();
             return await _context.Words.Where(w => w.UserId == userId && w.Visable == true).ToListAsync();
         }
+        
+        [HttpGet(Api.Words.GetAllWords)]
+        public async Task<ActionResult<IEnumerable<Word>>> GetAllWords()
+        {
+            var userId = HttpContext.GetUserId();
+            return await _context.Words.Where(w => w.UserId == userId).ToListAsync();
+        }
 
         // GET: api/Words/5
         [HttpGet(Api.Words.GetWord)]

@@ -15,7 +15,10 @@ class SongCreate extends Component {
         title: "",
         lyrics: "",
         rhymingWords: [],
-        rhymingWordsB: []
+        rhymingWordsB: [],
+        lineArray: [],
+        aaVisable: false,
+        abVisable: false
     }
 
     handleFieldChange = evt => {
@@ -54,16 +57,20 @@ class SongCreate extends Component {
             const lastLineIndex = lineArray.length - 2
             const lineBeforeWordArray = lineArray[lastLineIndex].split(" ")
             const lastWordIndex = lineBeforeWordArray.length - 1
-            getAllRhymingWords(lineBeforeWordArray[lastWordIndex]).then(rw => this.setState({ rhymingWords: rw }))
-            if (lineArray.length > 2) {
-                const secondToLastLineIndex = lineArray.length -3
-                const lineTwoBeforeWordArray = lineArray[secondToLastLineIndex].split(" ")
-                const lastWordOfSecondToLastLineIndex = lineTwoBeforeWordArray.length - 1
-                getAllRhymingWords(lineTwoBeforeWordArray[lastWordOfSecondToLastLineIndex]).then(rw => this.setState({rhymingWordsB: rw}))
+            if (this.state.lineArray.length !== lineArray.length) {
+                this.setState({lineArray: lineArray})
+                getAllRhymingWords(lineBeforeWordArray[lastWordIndex]).then(rw => this.setState({ rhymingWords: rw, aaVisable: true }))
+                if (lineArray.length > 2) {
+                    const secondToLastLineIndex = lineArray.length -3
+                    const lineTwoBeforeWordArray = lineArray[secondToLastLineIndex].split(" ")
+                    const lastWordOfSecondToLastLineIndex = lineTwoBeforeWordArray.length - 1
+                    getAllRhymingWords(lineTwoBeforeWordArray[lastWordOfSecondToLastLineIndex]).then(rw => this.setState({rhymingWordsB: rw, abVisable: true}))
+                } else {
+                    this.setState({rhymingWordsB: []})
+                }
             }
         }
-    }, 2000)
-
+    }, 2000) 
 
     render() {
         return (
@@ -78,6 +85,7 @@ class SongCreate extends Component {
 
 
                 <div>
+                    {this.state.aaVisable &&
                     <div>
                         <h4>A A</h4>
                         <div className="rhymingContainer">
@@ -89,7 +97,8 @@ class SongCreate extends Component {
                                 )
                             })}
                         </div>
-                    </div>
+                    </div>}
+                    {this.state.abVisable &&
                     <div>
                         <h4>A B</h4>
                         <div className="rhymingContainer">
@@ -101,7 +110,7 @@ class SongCreate extends Component {
                                 )
                             })}
                         </div>
-                    </div>
+                    </div>}
                 </div>
                 </div>
             </>

@@ -10,6 +10,14 @@ export const getWords = () => {
     .then(response => response.json())
 };
 
+export const getAllWords = () => {
+    const authHeader = createAuthHeaders()
+    return fetch(`${baseUrl}/words/all`, {
+        headers: authHeader
+    })
+    .then(response => response.json())
+};
+
 export const getWordById = (id) => {
     const authHeader = createAuthHeaders()
     return fetch(`${baseUrl}/words/${id}`, {
