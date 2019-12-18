@@ -23,11 +23,14 @@
     background: none !important;
 }
 
-.popupContent {
-    overflow: scroll;
-    height: 60%;
+
+.lyricsWithRhymes {
+    display: flex;
+    justify-content: space-around;
 }
 
-.popup {
-    
+.rhymingContainer {
+    text-align: left;
+    overflow: scroll;
+    height: 175px !important;
 }

@@ -86,6 +86,7 @@ namespace Capstone.Controllers.V1
             {
                 Name = wcvm.Name,
                 Definition = wcvm.Definition,
+                Visable = true,
                 UserId = HttpContext.GetUserId()
             };
 

@@ -3,7 +3,7 @@ import { Link, Route } from 'react-router-dom';
 import { getSongs, getSongById, createSong } from '../../../API/songManager';
 import { getAllRhymingWords } from '../../../API/thirdPartyApiManager';
 import { createWord } from '../../../API/wordManager';
-import { Button, Icon, Popup } from 'semantic-ui-react'
+import { Button, Icon } from 'semantic-ui-react'
 import { debounce } from "debounce";
 import "./SongCreate.css"
 import "./Song.css"
@@ -14,7 +14,8 @@ class SongCreate extends Component {
     state = {
         title: "",
         lyrics: "",
-        rhymingWords: []
+        rhymingWords: [],
+        rhymingWordsB: []
     }
 
     handleFieldChange = evt => {
@@ -53,7 +54,13 @@ class SongCreate extends Component {
             const lastLineIndex = lineArray.length - 2
             const lineBeforeWordArray = lineArray[lastLineIndex].split(" ")
             const lastWordIndex = lineBeforeWordArray.length - 1
-            getAllRhymingWords(lineBeforeWordArray[lastWordIndex]).then(rw => this.setState({rhymingWords: rw}))
+            getAllRhymingWords(lineBeforeWordArray[lastWordIndex]).then(rw => this.setState({ rhymingWords: rw }))
+            if (lineArray.length > 2) {
+                const secondToLastLineIndex = lineArray.length -3
+                const lineTwoBeforeWordArray = lineArray[secondToLastLineIndex].split(" ")
+                const lastWordOfSecondToLastLineIndex = lineTwoBeforeWordArray.length - 1
+                getAllRhymingWords(lineTwoBeforeWordArray[lastWordOfSecondToLastLineIndex]).then(rw => this.setState({rhymingWordsB: rw}))
+            }
         }
     }, 2000)
 
@@ -65,20 +72,37 @@ class SongCreate extends Component {
                 <p></p>
                 <Button className="saveButton ui massive" onClick={this.handleSubmit}><Icon name="save" /></Button>
                 <p></p>
-                <div className="popup">
-                    <Popup
-                    className="popupContent"
-                    trigger={<textarea className="songLyricsCreate" rows="27" cols="75" type="text" id="lyrics" placeholder="lyrics" onKeyUp={this.handleRhyming} onChange={this.handleFieldChange} value={this.state.lyrics}></textarea>}
-                    content={
-                        this.state.rhymingWords.map(rw => {
-                            return (
-                            <div>
-                                {rw.word}
-                            </div>
-                            )
-                        })
-                    }
-                    />
+                <div className="lyricsWithRhymes">
+
+                    <textarea className="songLyricsCreate" rows="27" cols="75" type="text" id="lyrics" placeholder="lyrics" onKeyUp={this.handleRhyming} onChange={this.handleFieldChange} value={this.state.lyrics}></textarea>
+
+
+                <div>
+                    <div>
+                        <h4>A A</h4>
+                        <div className="rhymingContainer">
+                            {this.state.rhymingWords.map(rw => {
+                                return (
+                                    <div>
+                                        {rw.word}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                    <div>
+                        <h4>A B</h4>
+                        <div className="rhymingContainer">
+                            {this.state.rhymingWordsB.map(rw => {
+                                return (
+                                    <div>
+                                        {rw.word}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>
+                </div>
                 </div>
             </>
         )
