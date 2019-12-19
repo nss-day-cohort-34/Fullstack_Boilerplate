@@ -1,48 +1,12 @@
 import React, { Component, FormattedMessage } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { getSongs, getSongById, editSong } from '../../../API/songManager';
-import { getAllWords } from '../../../API/wordManager';
 import { getAllRhymingWords } from '../../../API/thirdPartyApiManager';
 import { addCowriter } from '../../../API/cowriterManager';
 import { Button, Icon, Modal } from 'semantic-ui-react'
 import { debounce } from "debounce";
-import Autosuggest from 'react-autosuggest';
 import "./SongEdit.css"
-
-// Imagine you have a list of languages that you'd like to autosuggest.
-let words = []
-
-// Teach Autosuggest how to calculate suggestions for any given input value.
-const getSuggestions = value => {
-    return getAllWords().then(word => {
-        words.push(word)
-    })
-        .then(() => {
-            console.log(words)
-            const inputValue = value.trim().toLowerCase();
-            const inputLength = inputValue.length;
-            const filteredWords = words[0].filter(word => word.name.toLowerCase().slice(0, inputLength) === inputValue);
-            const filteredWordNames = filteredWords.map(word => {
-                return word.name
-            });
-            console.log(filteredWordNames)
-            return inputLength === 0 ? [] : filteredWordNames
-        })
-};
-
-// When suggestion is clicked, Autosuggest needs to populate the input
-// based on the clicked suggestion. Teach Autosuggest how to calculate the
-// input value for every given suggestion.
-const getSuggestionValue = suggestion => suggestion;
-
-// Use your imagination to render suggestions.
-const renderSuggestion = suggestion => (
-    <div>
-        {suggestion}
-    </div>
-);
-
-
+import { getSuggestions } from "./GetSuggestionsFunc"
 
 class SongEdit extends Component {
 
@@ -56,7 +20,6 @@ class SongEdit extends Component {
         lineArray: [],
         aaVisable: false,
         abVisable: false,
-        value: "",
         suggestions: []
     }
 
@@ -83,32 +46,23 @@ class SongEdit extends Component {
     //     addCowriter(id)
     // }
 
-    onChange = (event, { newValue }) => {
-        this.setState({
-            value: newValue
-        });
-    };
+    // onChange = (event, { newValue }) => {
+    //     this.setState({
+    //         value: newValue
+    //     });
+    // };
 
-    // Autosuggest will call this function every time you need to update suggestions.
-    // You already implemented this logic above, so just use it.
-    onSuggestionsFetchRequested = debounce(({ value }) => {
-        getSuggestions(value)
+    onSuggestionsFetchRequested = debounce(() => {
+        const wordArray = this.state.lyrics.split(" ")
+        const lastWordIndex = wordArray.length - 1
+        const lastWord = wordArray[lastWordIndex]
+        getSuggestions(lastWord)
             .then(filteredWordNames => {
                 this.setState({
                     suggestions: filteredWordNames
                 });
             })
     }, 2000);
-
-    // Autosuggest will call this function every time you need to clear suggestions.
-    onSuggestionsClearRequested = debounce(() => {
-        this.setState({
-            suggestions: []
-        });
-    }, 2000);
-
-
-
 
     handleRhyming = debounce(() => {
         if (this.state.lyrics.includes("\n")) {
@@ -136,13 +90,6 @@ class SongEdit extends Component {
 
     render() {
         const songId = parseInt(this.props.match.params.songId)
-        const { value, suggestions } = this.state;
-
-        // Autosuggest will pass through all these props to the input.
-        const inputProps = {
-            value,
-            onChange: this.onChange
-        };
         return (
             <>
                 <input className="songTitle" type="text" id="title" autoComplete="off" onChange={this.handleFieldChange} value={this.state.title}></input>
@@ -157,55 +104,57 @@ class SongEdit extends Component {
                     </Modal>
                 </div>
                 <div className="lyricsWithRhymes">
-
-                    <Autosuggest
-                        suggestions={this.state.suggestions}
-                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                        getSuggestionValue={getSuggestionValue}
-                        renderSuggestion={renderSuggestion}
-                        inputProps={inputProps}
-                        alwaysRenderSuggestions={true}
-                    />
-
-                    <textarea
-                        className="songLyrics"
-                        rows="29" cols="75"
-                        type="text" id="lyrics"
-                        onKeyUp={this.handleRhyming}
-                        onChange={this.handleFieldChange}
-                        value={this.state.lyrics}>
-                    </textarea>
+                    {this.state.rhymingWords &&
                     <div>
-                        {this.state.aaVisable &&
-                            <div>
-                                <h4>A A</h4>
-                                <div className="rhymingContainer">
-                                    {this.state.rhymingWords.map(rw => {
-                                        return (
-                                            <div key={Math.random()}>
-                                                {rw.word}
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            </div>}
-                        {this.state.abVisable &&
-                            <div>
-                                <h4>A B</h4>
-                                <div className="rhymingContainer">
-                                    {this.state.rhymingWordsB.map(rw => {
-                                        return (
-                                            <div key={Math.random()}>
-                                                {rw.word}
-                                            </div>
-                                        )
-                                    })}
-                                </div>
-                            </div>}
+                        <p>A A</p>
+                        <div className="rhymingContainer">
+                            {this.state.rhymingWords.map(rw => {
+                                return (
+                                    <div key={Math.random()}>
+                                        {rw.word}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>}
+                    {this.state.rhymingWordsB &&
+                    <div>
+                        <p>A B</p>
+                        <div className="rhymingContainer">
+                            {this.state.rhymingWordsB.map(rw => {
+                                return (
+                                    <div key={Math.random()}>
+                                        {rw.word}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>}
+                    {this.state.suggestions &&
+                    <div>
+                        <p>My Words</p>
+                        <div className="rhymingContainer">
+                            {this.state.suggestions.map(s => {
+                                return (
+                                    <div key={Math.random()}>
+                                        {s}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>}
+                    <div>
+                        <textarea
+                            className="songLyrics"
+                            rows="29" cols="75"
+                            type="text" id="lyrics"
+                            onKeyDown={this.onSuggestionsFetchRequested}
+                            onKeyUp={this.handleRhyming}
+                            onChange={this.handleFieldChange}
+                            value={this.state.lyrics}>
+                        </textarea>
                     </div>
                 </div>
-                <p></p>
             </>
         )
     }

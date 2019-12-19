@@ -31,14 +31,19 @@ namespace Capstone.Controllers.V1
         public async Task<ActionResult<IEnumerable<Word>>> GetWords()
         {
             var userId = HttpContext.GetUserId();
-            return await _context.Words.Where(w => w.UserId == userId && w.Visable == true).ToListAsync();
+            return await _context.Words.Where(w => w.UserId == userId && w.Visable == true).OrderBy(w => w.Name).ToListAsync();
         }
         
         [HttpGet(Api.Words.GetAllWords)]
-        public async Task<ActionResult<IEnumerable<Word>>> GetAllWords()
+        public async Task<ActionResult<IEnumerable<string>>> GetAllWords()
         {
             var userId = HttpContext.GetUserId();
-            return await _context.Words.Where(w => w.UserId == userId).ToListAsync();
+            var uniqueWords = await _context.Words
+                .Where(w => w.UserId == userId && w.Name != "")
+                .Select(w => w.Name)
+                .Distinct()
+                .ToListAsync();
+            return uniqueWords;
         }
 
         // GET: api/Words/5

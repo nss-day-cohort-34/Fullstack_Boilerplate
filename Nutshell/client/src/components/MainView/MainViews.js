@@ -108,6 +108,8 @@ export default class MainViews extends Component {
           }} />
           <Route exact path="/home/lyricsFirst" render={(props) => {
             return <HomeView
+              songs={this.props.songs}
+              user={this.props.user}
               {...props} />
           }} />
         </div>

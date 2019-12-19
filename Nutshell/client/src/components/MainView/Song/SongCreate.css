@@ -1,5 +1,5 @@
 .songTitleCreate {
-    height: 100px;
+    height: 90px;
     width: 45%;
     font-size: 50px;
     text-align: center;
@@ -32,5 +32,6 @@
 .rhymingContainer {
     text-align: left;
     overflow: scroll;
-    height: 175px !important;
+    height: 355px !important;
+    min-width: 100px !important;
 }

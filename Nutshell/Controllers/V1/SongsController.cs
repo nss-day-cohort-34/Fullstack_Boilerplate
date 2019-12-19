@@ -30,7 +30,7 @@ namespace Capstone.Controllers.V1
         public async Task<ActionResult<IEnumerable<Song>>> GetSongs()
         {
             var userId = HttpContext.GetUserId();
-            return await _context.Songs.Where(s => s.InProgress == true && s.UserId == userId).ToListAsync();
+            return await _context.Songs.Where(s => s.InProgress == true && s.UserId == userId).OrderBy(s => s.Title).ToListAsync();
         }
 
         // GET: api/Songs/5

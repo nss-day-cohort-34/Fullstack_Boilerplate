@@ -1,5 +1,5 @@
 .songTitle {
-    height: 100px;
+    height: 90px;
     width: 80%;
     font-size: 50px;
     text-align: center;
@@ -8,8 +8,6 @@
     outline: none;
     font-family: 'Playfair Display', serif;
     color: #5d5d5d;
-    margin-top: 60px;
-    margin-bottom: 8px;
 }
 
 .songLyrics {
@@ -17,11 +15,12 @@
 }
 
 .saveButton {
-    margin: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
     background: none !important;
 }
 
 .saveAndConnect {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: center;
 }

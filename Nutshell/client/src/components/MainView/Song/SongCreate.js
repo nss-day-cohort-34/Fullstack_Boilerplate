@@ -5,6 +5,7 @@ import { getAllRhymingWords } from '../../../API/thirdPartyApiManager';
 import { createWord } from '../../../API/wordManager';
 import { Button, Icon } from 'semantic-ui-react'
 import { debounce } from "debounce";
+import { getSuggestions } from "./GetSuggestionsFunc"
 import "./SongCreate.css"
 import "./Song.css"
 
@@ -18,7 +19,8 @@ class SongCreate extends Component {
         rhymingWordsB: [],
         lineArray: [],
         aaVisable: false,
-        abVisable: false
+        abVisable: false,
+        suggestions: []
     }
 
     handleFieldChange = evt => {
@@ -49,6 +51,18 @@ class SongCreate extends Component {
             this.props.history.push(`/home/songs/${s[0].id}`)
         })
     }
+   
+    onSuggestionsFetchRequested = debounce(() => {
+        const wordArray = this.state.lyrics.split(" ")
+        const lastWordIndex = wordArray.length - 1
+        const lastWord = wordArray[lastWordIndex]
+        getSuggestions(lastWord)
+            .then(filteredWordNames => {
+                this.setState({
+                    suggestions: filteredWordNames
+                });
+            })
+    }, 2000);
 
     handleRhyming = debounce(event => {
         event.preventDefault()
@@ -80,38 +94,56 @@ class SongCreate extends Component {
                 <Button className="saveButton ui massive" onClick={this.handleSubmit}><Icon name="save" /></Button>
                 <p></p>
                 <div className="lyricsWithRhymes">
-
-                    <textarea className="songLyricsCreate" rows="27" cols="75" type="text" id="lyrics" placeholder="lyrics" onKeyUp={this.handleRhyming} onChange={this.handleFieldChange} value={this.state.lyrics}></textarea>
-
-
-                <div>
-                    {this.state.aaVisable &&
+                    {this.state.rhymingWords &&
                     <div>
-                        <h4>A A</h4>
+                        <p>A A</p>
                         <div className="rhymingContainer">
                             {this.state.rhymingWords.map(rw => {
                                 return (
-                                    <div>
+                                    <div key={Math.random()}>
                                         {rw.word}
                                     </div>
                                 )
                             })}
                         </div>
                     </div>}
-                    {this.state.abVisable &&
+                    {this.state.rhymingWordsB &&
                     <div>
-                        <h4>A B</h4>
+                        <p>A B</p>
                         <div className="rhymingContainer">
                             {this.state.rhymingWordsB.map(rw => {
                                 return (
-                                    <div>
+                                    <div key={Math.random()}>
                                         {rw.word}
                                     </div>
                                 )
                             })}
                         </div>
                     </div>}
-                </div>
+                    {this.state.suggestions &&
+                    <div>
+                        <p>My Words</p>
+                        <div className="rhymingContainer">
+                            {this.state.suggestions.map(s => {
+                                return (
+                                    <div key={Math.random()}>
+                                        {s}
+                                    </div>
+                                )
+                            })}
+                        </div>
+                    </div>}
+
+                    <textarea 
+                        className="songLyricsCreate" 
+                        rows="27" cols="75" 
+                        type="text" id="lyrics" 
+                        placeholder="lyrics" 
+                        onKeyDown={this.onSuggestionsFetchRequested}
+                        onKeyUp={this.handleRhyming} 
+                        onChange={this.handleFieldChange} 
+                        value={this.state.lyrics}>
+                    </textarea>
                 </div>
             </>
         )

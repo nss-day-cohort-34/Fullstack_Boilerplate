@@ -43,7 +43,7 @@ class ReferenceCreate extends Component {
                 <p></p>
                 <select id="typeOfReferenceId" onChange={this.handleFieldChange} value={this.state.typeOfReferenceId}>
                     {this.props.referenceTypes.map(rt => {
-                    return <option value={rt.id}>{rt.name}</option>
+                    return <option key={rt.name} value={rt.id}>{rt.name}</option>
                     })}
                 </select>
             </>

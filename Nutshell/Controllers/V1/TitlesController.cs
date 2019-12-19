@@ -32,7 +32,7 @@ namespace Capstone.Controllers.V1
         public async Task<ActionResult<IEnumerable<Title>>> GetTitles()
         {
             var userId = HttpContext.GetUserId();
-            return await _context.Titles.Where(t => t.UserId == userId).ToListAsync();
+            return await _context.Titles.Where(t => t.UserId == userId).OrderBy(t => t.Name).ToListAsync();
         }
 
         // GET: api/Titles/5

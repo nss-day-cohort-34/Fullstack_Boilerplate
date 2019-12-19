@@ -174,6 +174,7 @@ class Home extends Component {
 
             <div className="makeMainBig"></div>
             <MainViews
+              user={this.props.user}
               words={this.state.words}
               updateWords={this.updateWords}
               songs={this.state.songs}

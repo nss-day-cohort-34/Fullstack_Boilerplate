@@ -36,7 +36,7 @@ namespace Capstone.Controllers.V1
         public async Task<ActionResult<IEnumerable<Reference>>> GetReferences()
         {
             var userId = HttpContext.GetUserId();
-            return await _context.References.Include(r => r.TypeOfReference).Where(r => r.UserId == userId).ToListAsync();
+            return await _context.References.Include(r => r.TypeOfReference).Where(r => r.UserId == userId).OrderBy(r => r.Name).ToListAsync();
         }
 
         // GET: api/References/5

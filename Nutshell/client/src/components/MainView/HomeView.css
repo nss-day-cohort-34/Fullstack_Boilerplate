@@ -1,3 +1,17 @@
 .mainContainer {
     height: 700px;
 }
+
+.homeView {
+    font-weight: 900;
+    padding-top: 100px;
+    margin-top: 50px;
+    font-size: 50px;
+    color: #5d5d5d;
+    font-family: 'Playfair Display', serif;
+}
+
+.counter {
+    font-size: 30px;
+    font-weight: 100;
+}
