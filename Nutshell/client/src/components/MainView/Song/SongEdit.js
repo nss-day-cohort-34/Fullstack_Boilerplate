@@ -40,22 +40,19 @@ class SongEdit extends Component {
         getAllWords().then(words => {
             let matchingWords = []
             words.forEach(w => {
-                console.log(w)
-                console.log(this.state.songId.toString())
                 if (w.definition === this.state.songId.toString() && w.visable === false) {
                     matchingWords.push(w)
                 }
             });
-            console.log(matchingWords)
             matchingWords.forEach(word => {
-                console.log(word)
                 deleteWord(word.id)
             });
         })
         const foundSong = this.props.songs.find(s => s.id === this.state.songId)
         foundSong.title = this.state.title
         foundSong.lyrics = this.state.lyrics
-        const wordArray = this.state.lyrics.split(" ")
+        const lyricsWithoutLineBreaks = this.state.lyrics.replace(/\n/g, " ")
+        const wordArray = lyricsWithoutLineBreaks.split(" ")
         const wordSet = new Set(wordArray)       
         wordSet.forEach(word => {
             const newWord = {

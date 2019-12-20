@@ -35,7 +35,8 @@ class SongCreate extends Component {
             title: this.state.title,
             lyrics: this.state.lyrics
         }
-        const wordArray = this.state.lyrics.split(" ")
+        const lyricsWithoutLineBreaks = this.state.lyrics.replace(/\n/g, " ")
+        const wordArray = lyricsWithoutLineBreaks.split(" ")
         const wordSet = new Set(wordArray)
         createSong(newSong).then(s => {
             this.props.updateSongs()

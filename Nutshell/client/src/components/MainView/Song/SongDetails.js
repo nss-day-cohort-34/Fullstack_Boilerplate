@@ -1,6 +1,7 @@
 import React, { Component, FormattedMessage  } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { getSongs, getSongById, deleteSong } from '../../../API/songManager';
+import { getAllWords, deleteWord } from '../../../API/wordManager';
 import { Button, Modal, Icon } from 'semantic-ui-react'
 import "./SongDetails.css"
 
@@ -27,6 +28,17 @@ class SongDetails extends Component {
     }
 
     handleDeleteSong = id => {
+        getAllWords().then(words => {
+            let matchingWords = []
+            words.forEach(w => {
+                if (w.definition === this.props.match.params.songId.toString() && w.visable === false) {
+                    matchingWords.push(w)
+                }
+            });
+            matchingWords.forEach(word => {
+                deleteWord(word.id)
+            });
+        })
         deleteSong(id)
             .then(() => {
                 this.props.updateSongs()
