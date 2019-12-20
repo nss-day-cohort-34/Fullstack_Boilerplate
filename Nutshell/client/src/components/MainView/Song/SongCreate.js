@@ -2,7 +2,7 @@ import React, { Component, FormattedMessage } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { getSongs, getSongById, createSong } from '../../../API/songManager';
 import { getAllRhymingWords } from '../../../API/thirdPartyApiManager';
-import { createWord } from '../../../API/wordManager';
+import { createDataWord } from '../../../API/wordManager';
 import { Button, Icon } from 'semantic-ui-react'
 import { debounce } from "debounce";
 import { getSuggestions } from "./GetSuggestionsFunc"
@@ -42,10 +42,9 @@ class SongCreate extends Component {
             wordSet.forEach(word => {
                 const newWord = {
                     name: word,
-                    definition: `${s[0].id}`,
-                    visable: false
+                    definition: `${s[0].id}`
                 }
-                createWord(newWord)
+                createDataWord(newWord)
             });
             this.props.updateWords()
             this.props.history.push(`/home/songs/${s[0].id}`)

@@ -1,7 +1,7 @@
 import React, { Component, FormattedMessage } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { Button, Icon, Modal } from 'semantic-ui-react'
-import { getAllWords } from "../../API/wordManager"
+import { getDataWords } from "../../API/wordManager"
 import { getSongs } from "../../API/songManager"
 import "./HomeView.css"
 
@@ -9,18 +9,18 @@ import "./HomeView.css"
 class HomeView extends Component {
 
     state = {
-        allWords: []
+        dataWords: []
     }
 
-    updateAllWords = () => {
-        getAllWords()
+    updateDataWords = () => {
+        getDataWords()
             .then(words => {
-                this.setState({ allWords: words })
+                this.setState({ dataWords: words })
             })
     }
 
     componentDidMount() {
-        this.updateAllWords()
+        this.updateDataWords()
     }
 
     render() {
@@ -28,7 +28,7 @@ class HomeView extends Component {
             <>
                 <div className="mainContainer">
                     <h1 className="homeView">Welcome, {this.props.user.username}</h1>
-                    <h2 className="homeView counter">You've written {this.state.allWords.length} unique words in {this.props.songs.length} songs</h2>
+                    <h2 className="homeView counter">You've written {this.state.dataWords.length} unique words in {this.props.songs.length} songs</h2>
                 </div> 
             </>
         )

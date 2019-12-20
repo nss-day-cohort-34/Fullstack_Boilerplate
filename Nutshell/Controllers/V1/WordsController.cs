@@ -27,6 +27,14 @@ namespace Capstone.Controllers.V1
         }
 
         // GET: api/Words
+        [HttpGet(Api.Words.GetAllWords)]
+        public async Task<ActionResult<IEnumerable<Word>>> GetAllWords()
+        {
+            var userId = HttpContext.GetUserId();
+            return await _context.Words.Where(w => w.UserId == userId).ToListAsync();
+        }
+
+        // GET: api/Words
         [HttpGet(Api.Words.GetWords)]
         public async Task<ActionResult<IEnumerable<Word>>> GetWords()
         {
@@ -34,12 +42,12 @@ namespace Capstone.Controllers.V1
             return await _context.Words.Where(w => w.UserId == userId && w.Visable == true).OrderBy(w => w.Name).ToListAsync();
         }
         
-        [HttpGet(Api.Words.GetAllWords)]
-        public async Task<ActionResult<IEnumerable<string>>> GetAllWords()
+        [HttpGet(Api.Words.GetDataWords)]
+        public async Task<ActionResult<IEnumerable<string>>> GetDataWords()
         {
             var userId = HttpContext.GetUserId();
             var uniqueWords = await _context.Words
-                .Where(w => w.UserId == userId && w.Name != "")
+                .Where(w => w.UserId == userId && w.Name != "" && w.Visable == false)
                 .Select(w => w.Name)
                 .Distinct()
                 .ToListAsync();
@@ -111,6 +119,28 @@ namespace Capstone.Controllers.V1
             return Ok(foundWord);
 
         }
+        
+        // POST: api/Songs
+        [HttpPost(Api.Words.PostDataWord)]
+        public async Task<ActionResult<Word>> PostDataWord(WordCreateViewModel wcvm)
+        {
+            Word newWord = new Word
+            {
+                Name = wcvm.Name,
+                Definition = wcvm.Definition,
+                Visable = false,
+                UserId = HttpContext.GetUserId()
+            };
+
+            _context.Words.Add(newWord);
+            await _context.SaveChangesAsync();
+
+            var foundWord = _context.Words.Where(w => w.UserId == newWord.UserId).OrderByDescending(w => w.Id).Take(1);
+
+
+            return Ok(foundWord);
+
+        }
 
         // DELETE: api/Words/5
         [HttpDelete(Api.Words.DeleteWord)]
@@ -127,6 +157,7 @@ namespace Capstone.Controllers.V1
 
             return word;
         }
+
         private bool WordExists(int id)
         {
             return _context.Songs.Any(e => e.Id == id);

@@ -1,6 +1,7 @@
 import React, { Component, FormattedMessage } from 'react';
 import { Link, Route } from 'react-router-dom';
 import { getSongs, getSongById, editSong } from '../../../API/songManager';
+import { deleteWord, createDataWord, getAllWords } from '../../../API/wordManager';
 import { getAllRhymingWords } from '../../../API/thirdPartyApiManager';
 import { addCowriter } from '../../../API/cowriterManager';
 import { Button, Icon, Modal } from 'semantic-ui-react'
@@ -36,10 +37,36 @@ class SongEdit extends Component {
 
     handleSubmit = event => {
         event.preventDefault()
+        getAllWords().then(words => {
+            let matchingWords = []
+            words.forEach(w => {
+                console.log(w)
+                console.log(this.state.songId.toString())
+                if (w.definition === this.state.songId.toString() && w.visable === false) {
+                    matchingWords.push(w)
+                }
+            });
+            console.log(matchingWords)
+            matchingWords.forEach(word => {
+                console.log(word)
+                deleteWord(word.id)
+            });
+        })
         const foundSong = this.props.songs.find(s => s.id === this.state.songId)
         foundSong.title = this.state.title
         foundSong.lyrics = this.state.lyrics
-        editSong(this.state.songId, foundSong).then(() => this.props.history.push(`/home/songs/${this.state.songId}`))
+        const wordArray = this.state.lyrics.split(" ")
+        const wordSet = new Set(wordArray)       
+        wordSet.forEach(word => {
+            const newWord = {
+                name: word,
+                definition: `${this.state.songId}`
+            }
+            createDataWord(newWord)
+        });
+        editSong(this.state.songId, foundSong).then(() => {
+            this.props.history.push(`/home/songs/${this.state.songId}`)
+        })
     }
 
     // handleConnect = id => {
