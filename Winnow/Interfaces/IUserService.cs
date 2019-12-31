@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
-using Capstone.Models.Data;
+using Capstone.Models.DataModels;
 using Capstone.Models.ViewModels;
 using System;
 using System.Collections.Generic;

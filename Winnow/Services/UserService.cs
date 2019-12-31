@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Capstone.Data;
 using Capstone.Interfaces;
-using Capstone.Models.Data;
+using Capstone.Models.DataModels;
 using Capstone.Models.ViewModels;
 using Capstone.Settings;
 using System;
@@ -81,8 +81,7 @@ namespace Capstone.Services
                 Email = user.Email,
                 UserName = user.Username,
                 FirstName = user.FirstName,
-                LastName = user.LastName,
-                StreetAddress = user.StreetAddress
+                LastName = user.LastName,               
             };
 
             var createdUser = await _userManager.CreateAsync(newUser, user.Password);

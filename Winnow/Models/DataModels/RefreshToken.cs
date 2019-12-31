@@ -6,7 +6,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Capstone.Models.Data
+namespace Capstone.Models.DataModels
 {
     public class RefreshToken
     {

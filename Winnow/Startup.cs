@@ -14,7 +14,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Capstone.Interfaces;
 using Capstone.Services;
-using Capstone.Models.Data;
+using Capstone.Models.DataModels;
 
 namespace Capstone
 {
