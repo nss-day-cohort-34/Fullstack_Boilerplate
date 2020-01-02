@@ -31,7 +31,7 @@ namespace Capstone.Controllers.V1
         public async Task<IActionResult> Login([FromBody] UserLoginViewModel user)
         {
             var authResponse = await _userSerice.LoginAsync(
-                user.Email,
+                user.UserName,
                 user.Password);
 
             if (!authResponse.Success)

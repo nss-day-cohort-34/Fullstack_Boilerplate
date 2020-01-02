@@ -12,7 +12,7 @@ namespace Capstone.Interfaces
     {
         Task<AuthenticationResult> RegisterUserAsync(UserRegistrationViewModel user);
 
-        Task<AuthenticationResult> LoginAsync(string email, string password);
+        Task<AuthenticationResult> LoginAsync(string userName, string password);
 
         Task<AuthenticationResult> RefreshTokenAsync(string token, string refreshToken);
 

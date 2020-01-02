@@ -11,10 +11,13 @@ namespace Capstone.Routes.V1
         internal const string Version = "v1";
         internal const string Base = Root + "/" + Version;
 
-        public static class Values
+        public static class Books
         {
-            public const string GetAll = Base + "/Values";
-            public const string Get = Base + "/Values/{id}";
+            public const string GetAllBooks = Base + "/Books";
+            public const string GetBook = Base + "/Books/{id}";
+            public const string PostBook = Base + "/Books";
+            public const string EditBook = Base + "/Books/{id}";
+            public const string DeleteBook = Base + "/Books/{id}";
         }
 
         public static class User

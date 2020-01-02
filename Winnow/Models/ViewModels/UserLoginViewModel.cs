@@ -7,9 +7,8 @@ using System.Threading.Tasks;
 namespace Capstone.Models.ViewModels
 {
     public class UserLoginViewModel
-    {
-        [EmailAddress(ErrorMessage = "Invalid Email")]
-        public string Email { get; set; }
+    {      
+        public string UserName { get; set; }
         public string Password { get; set; }
     }
 }

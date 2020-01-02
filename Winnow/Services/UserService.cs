@@ -35,12 +35,12 @@ namespace Capstone.Services
             _tokenValidationParams = tokenValidationParams;
         }
 
-        public async Task<AuthenticationResult> LoginAsync(string email, string password)
+        public async Task<AuthenticationResult> LoginAsync(string userName, string password)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await _userManager.FindByNameAsync(userName);
             var invalidCombination = new AuthenticationResult
             {
-                ErrorMessages = new[] { "Invalid email or password" }
+                ErrorMessages = new[] { "Invalid username or password" }
             };
 
             if (user == null) return invalidCombination;
@@ -65,7 +65,7 @@ namespace Capstone.Services
                 };
             }
 
-            var existingUsername = await _userManager.FindByNameAsync(user.Username);
+            var existingUsername = await _userManager.FindByNameAsync(user.UserName);
 
             if (existingEmail != null)
             {
@@ -79,7 +79,7 @@ namespace Capstone.Services
             var newUser = new ApplicationUser
             {
                 Email = user.Email,
-                UserName = user.Username,
+                UserName = user.UserName,
                 FirstName = user.FirstName,
                 LastName = user.LastName,               
             };

@@ -40,6 +40,6 @@ export default {
         return fetch(`${baseUrl}/books/${id}`, {
             headers: authHeader,
             method: "DELETE"
-        }).then(response => response.json())
+        })
     }
 }

@@ -27,8 +27,7 @@ class AddBookModal extends Component {
     handleFieldChange = evt => {
         const stateToChange = {};
         stateToChange[evt.target.id] = evt.target.value;
-        this.setState(stateToChange);
-        console.log(stateToChange)
+        this.setState(stateToChange);       
     };
 
     constructNewBook = () => {
@@ -107,7 +106,7 @@ class AddBookModal extends Component {
                         <ModalFooter>
                             <Button primary onClick={() => {
                                     this.constructNewBook()
-                                    this.clearDescriptionInState()
+                                    //this.clearDescriptionInState()
                             }}
                             >save</Button>
                             <Button onClick={this.toggle}>cancel</Button>
