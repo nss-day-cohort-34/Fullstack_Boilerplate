@@ -1,15 +1,16 @@
 import { Route, Router, Redirect } from "react-router-dom";
 import React, { Component } from "react";
 import Auth from './Auth/Auth'
-//import BookMain from './Books/BookMain'
+import getUser from '../API/userManager'
+import BookMain from './Books/BookMain'
 // import RandomQuote from './Quotes/RandomQuote'
 // import Pages from './Pages/Pages'
 // import Search from './Search/Search'
 
 
 export default class ApplicationViews extends Component {
-  //isAuthenticated = () => sessionStorage.getItem("credentials") !== null;
-  activeUser = () => parseInt(sessionStorage.getItem("credentials"))
+  isAuthenticated = () => localStorage.getItem("user") !== null;
+ 
 
 
   render() {
@@ -19,20 +20,26 @@ export default class ApplicationViews extends Component {
           <Route
           exact path="/"
           render={props => {
-              return <Auth {...props} />;
+              return <Auth 
+                {...props} 
+                onLogin={(user) => this.setState({ user })}
+              />;
           }}
           />
 
-          {/* <Route
+          <Route
           exact path="/books" render={props => {
               //if (this.isAuthenticated()) {
-              return <BookMain {...props} />
+              return <BookMain 
+                {...props}
+                onLogin={(user) => this.setState({ user })} 
+              />
               //}
               //return <Redirect to="/" />
           }}
           />
 
-          <Route
+          {/* <Route
           path="/books/:bookId(\d+)" render={props => {
               //if (this.isAuthenticated()) {
               return <Pages
@@ -56,7 +63,7 @@ export default class ApplicationViews extends Component {
               //}
               //return <Redirect to="/" />
           }}
-          /> */}
+          />  */}
       
       </React.Fragment>
     );

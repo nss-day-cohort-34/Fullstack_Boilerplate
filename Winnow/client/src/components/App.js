@@ -19,7 +19,9 @@ class App extends Component {
     return (
       <div className="App">
         <div className="appViews">
-              <ApplicationViews />
+              <ApplicationViews 
+               
+              />
         </div>
         <div className="nav__container">
             <Menu

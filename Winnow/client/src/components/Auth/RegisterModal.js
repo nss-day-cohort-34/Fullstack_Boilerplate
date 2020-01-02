@@ -22,15 +22,18 @@ class RegisterModal extends React.Component {
 
     submit = (event) => {
         event.preventDefault();
-        const { username, email, password, confirmPassword } = this.state;
+        const { firstName, lastName, username, email, password, confirmPassword } = this.state;
         register({
+            firstName,
+            lastName,
             username,
             email,
             password,
             confirmPassword,
         })
-            .then((user) => {
+        .then((user) => {
             this.props.onLogin(user);
+            this.toggle()
             // const firstBookObject = {
             //                  userId: user.id,
             //                  title: "quotebook",
@@ -41,7 +44,7 @@ class RegisterModal extends React.Component {
             //              BookDataManager.postBook(firstBookObject)
             //              .then(()=> {
             //                  alert("welcome to winnow. please sign in.")
-            //                  this.toggle()
+            //                  
             //              })
             })
             .catch(err => {

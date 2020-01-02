@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { Button, Image } from 'semantic-ui-react'
 import { Input } from 'reactstrap'
 //import logo from './agronomy.png'
-//import "./Login.css";
+import "../Styles/Login.css";
 import { withRouter, Link } from 'react-router-dom';
 import { login } from '../../API/userManager';
 
 
 class Login extends Component {
     state = {
-        email: '',
+        username: '',
         password: '',
         errors: [],
       }
@@ -17,12 +17,12 @@ class Login extends Component {
       submit = (event) => {
         event.preventDefault();
         login({
-          email: this.state.email,
+          username: this.state.username,
           password: this.state.password,
         })
           .then((user) => {
             this.props.onLogin(user);
-            this.props.history.push('/');
+            this.props.history.push('/books');
           })
           .catch(err => {
             this.setState({ errors: err.messages });
@@ -60,7 +60,8 @@ render() {
                 <form onSubmit={this.submit}>
                     <Input
                         onChange={this.handleInputChange}
-                        type="username"
+                        type="text"
+                        name="username"
                         id="username"
                         placeholder="username"
                         required
@@ -71,6 +72,7 @@ render() {
                         onChange={this.handleInputChange}
                         type="password"
                         id="password"
+                        name="password"
                         placeholder="password"
                         required
                         className="input"
