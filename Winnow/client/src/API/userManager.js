@@ -1,10 +1,10 @@
 const baseUrl = '/api/v1';
 
 export const createAuthHeaders = () => {
-  const token = localStorage.getItem('token');
+  const token = localStorage.getItem("token");
   return {
     Authorization: `bearer ${token}`,
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   }
 }
 

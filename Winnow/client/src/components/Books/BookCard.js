@@ -1,19 +1,19 @@
-// import React, { Component } from 'react'
-// import EditBookModal from './EditBookModal.js'
-// import { Button, Transition } from 'semantic-ui-react'
+import React, { Component } from 'react'
+import EditBookModal from './EditBookModal.js'
+import { Button, Transition } from 'semantic-ui-react'
 // import PageDataManager from '../Pages/PageDataManager'
 // import QuoteDataManager from '../Quotes/QuoteDataManager'
-// import ConfirmBookDeleteModal from './ConfirmDeleteBookModal'
+import ConfirmBookDeleteModal from './ConfirmDeleteBookModal'
 // import './Card.css'
 
-// class BookCard extends Component {
-//     state = {
-//         pages: [],
-//         pageId: 0,
-//         description: "",
-//         display: "hide",
-//         visible: false
-//     }
+class BookCard extends Component {
+    state = {
+        pages: [],
+        pageId: 0,
+        description: "",
+        display: "hide",
+        visible: false
+    }
 
 //   constructOrNavigateToFirstPage = () => {
 // //Validates user input
@@ -86,45 +86,45 @@
 //             })
 //     }
 
-//     toggle = () => {
-//         this.setState(state => ({ visible: !state.visible }))
-//         console.log(this.state.visible);
-//       }
+    toggle = () => {
+        this.setState(state => ({ visible: !state.visible }))
+        console.log(this.state.visible);
+      }
 
-//   render() {
-//     return (
+  render() {
+    return (
 
-//         <div className="bookCard">
-//         <button onClick={this.toggle}>edit or delete</button>
-//                  <Transition animation="horizontal flip" visible={this.state.visible}>
-//                     <div className="bookEditAndDelete">
-//                         <ConfirmBookDeleteModal {...this.props}/>
-//                         <EditBookModal
-//                             {...this.props}
-//                             postEditedBook={this.props.postEditedBook}
-//                         />
-//                     </div>
-//                 </Transition>
-//                         <div className="card__title"
-//                         >
-//                             <h2>{this.props.book.title}</h2>
-//                             <div>
-//                                 <Button
-//                                     onClick={this.constructOrNavigateToFirstPage}
-//                                     icon="chevron right"
-//                                     size="mini"
-//                                 >
-//                                 </Button>
-//                             </div>
-//                         </div>
+        <div className="bookCard">
+        <button onClick={this.toggle}>edit or delete</button>
+                 <Transition animation="horizontal flip" visible={this.state.visible}>
+                    <div className="bookEditAndDelete">
+                        <ConfirmBookDeleteModal {...this.props}/> 
+                        <EditBookModal
+                            {...this.props}
+                            putEditedBook={this.props.putEditedBook}
+                        />
+                    </div>
+                </Transition>
+                        <div className="card__title"
+                        >
+                            <h2>{this.props.book.title}</h2>
+                            <div>
+                                <Button
+                                    // onClick={this.constructOrNavigateToFirstPage}
+                                    icon="chevron right"
+                                    size="mini"
+                                >
+                                </Button>
+                            </div>
+                        </div>
 
-//                     <div className="book__description">
-//                         <h4><em>{this.props.book.description}</em></h4>
-//                     </div>
-//             </div>
+                    <div className="book__description">
+                        <h4><em>{this.props.book.description}</em></h4>
+                    </div>
+            </div>
 
-//     );
-//   }
-// }
+    );
+  }
+}
 
-// export default BookCard
+export default BookCard

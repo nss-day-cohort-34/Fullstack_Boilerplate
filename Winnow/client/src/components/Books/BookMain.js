@@ -8,7 +8,7 @@ class BookMain extends Component {
     render() {
         return (
             <React.Fragment>
-                <p>I work!</p>
+                <BookList />
             </React.Fragment>
         )
     }
