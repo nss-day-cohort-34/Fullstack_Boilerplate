@@ -1,75 +1,61 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { withRouter, Link } from 'react-router-dom';
 import { login } from '../API/userManager';
 
-class Login extends Component {
-  state = {
-    email: '',
-    password: '',
-    errors: [],
-  }
+function Login({ onLogin, history }) {
+  const [email, setEmail] = useState();
+  const [password, setPassword] = useState();
+  const [errors, setErrors] = useState([]);
 
-  submit = (event) => {
+  const submit = (event) => {
     event.preventDefault();
-    login({
-      email: this.state.email,
-      password: this.state.password,
-    })
+    login({ email, password })
       .then((user) => {
-        this.props.onLogin(user);
-        this.props.history.push('/');
+        onLogin(user);
+        history.push('/');
       })
       .catch(err => {
-        this.setState({ errors: err.messages });
+        setErrors(err.messages || ["Whoops! Something unexpected happened..."]);
       });
   }
 
-  handleInputChange = (event) => {
-    const { name, value } = event.target;
-    this.setState({
-      [name]: value,
-    });
-  }
-
-  render() {
-    return (
-      <form onSubmit={this.submit}>
-        <h1>Login</h1>
-        <ul>
-          {
-            this.state.errors ? this.state.errors.map((message, i) => (
-              <li key={i}>{message}</li>
-            )) : null
-          }
-        </ul>
-        <div>
-          <label htmlFor="email">
-            Email
+  return (
+    <form onSubmit={submit}>
+      <h1>Login</h1>
+      <ul>
+        {
+          errors && errors.map((message, i) => (
+            <li key={i}>{message}</li>
+          ))
+        }
+      </ul>
+      <div>
+        <label for="email">
+          Email
         </label>
-          <input
-            id="email"
-            name="email"
-            type="email"
-            placeholder="example@email.com"
-            onChange={this.handleInputChange} />
-        </div>
-        <div>
-          <label htmlFor="password">
-            Password
+        <input
+          id="email"
+          name="email"
+          type="email"
+          placeholder="example@email.com"
+          onChange={(e) => setEmail(e.target.value)} />
+      </div>
+      <div>
+        <label for="password">
+          Password
         </label>
-          <input
-            id="password"
-            name="password"
-            type="password"
-            onChange={this.handleInputChange} />
-        </div>
-        <button type="submit">Log in</button>
-        <p>
-          Not yet a user? <Link to="/register">Sign up</Link>
-        </p>
-      </form>
-    );
-  }
+        <input
+          id="password"
+          name="password"
+          type="password"
+          onChange={(e) => setPassword(e.target.value)} />
+      </div>
+      <button type="submit">Log in</button>
+      <p>
+        Not yet a user? <Link to="/register">Sign up</Link>
+      </p>
+    </form>
+  );
 }
 
 export default withRouter(Login);
