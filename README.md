@@ -17,7 +17,7 @@ If you haven't discussed JSON Web Tokens (JWTs) in class, be sure to go over thi
   ```json
   {
     "JwtSettings": {
-      "Secret": "R7e60wQzebxYbxZTbQPdpQ4kxBTAM7SJ"
+      "Secret": "R7e60wQzebxYbxZTbQPdpQ4kxBTAM7SJ" // Replace this with any other random string
     }
   }
   ```
