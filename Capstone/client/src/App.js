@@ -1,35 +1,32 @@
-import React, { useState } from 'react';
-import { Redirect, BrowserRouter as Router, Route } from 'react-router-dom';
-import Header from './components/Header';
-import Login from './components/Login';
-import Register from './components/Register';
-import Home from './components/Home';
-import { getUser, removeUser } from './API/userManager';
-import './App.css';
+import React from "react";
+import { Redirect, BrowserRouter as Router, Route } from "react-router-dom";
+import ApplicationViews from "./components/ApplicationViews";
+import Header from "./components/Header";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import { getUser } from "./API/userManager";
+import "./App.css";
 
 function App() {
-  const [user, setUser] = useState(getUser());
-
-  const logout = () => {
-    setUser(null);
-    removeUser();
-  }
-
   return (
     <div className="App">
       <Router>
-        <Header user={user} logout={logout} />
-        <Route exact path="/login" render={() => (
-          <Login onLogin={setUser} />
-        )} />
-        <Route exact path="/register" render={() => (
-          <Register onLogin={setUser} />
-        )} />
-        <Route exact path="/" render={() => {
-          return user ? (
-            <Home />
-          ) : <Redirect to="/login" />
-        }} />
+        <Header />
+        <Route
+          render={() =>
+            getUser() ? <ApplicationViews /> : <Redirect to="/login" />
+          }
+        />
+        <Route
+          exact
+          path="/login"
+          render={() => (getUser() ? <Redirect to="/" /> : <Login />)}
+        />
+        <Route
+          exact
+          path="/register"
+          render={() => (getUser() ? <Redirect to="/" /> : <Register />)}
+        />
       </Router>
     </div>
   );

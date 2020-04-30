@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
-import { Link, withRouter } from 'react-router-dom';
-import { register } from '../API/userManager';
+import React, { useState } from "react";
+import { Link, withRouter } from "react-router-dom";
+import { register } from "../API/userManager";
 
-function Register({ onLogin, history }) {
+function Register({ history }) {
   const [username, setUsername] = useState();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
@@ -17,69 +17,58 @@ function Register({ onLogin, history }) {
       password,
       confirmPassword,
     })
-      .then((user) => {
-        onLogin(user);
-        history.push('/');
-      })
-      .catch(err => {
+      .then((user) => history.push("/"))
+      .catch((err) => {
         setErrors(err.messages || ["Whoops! Something unexpected happened..."]);
       });
-  }
+  };
 
   return (
     <form onSubmit={submit}>
       <h1>Register</h1>
       <ul>
-        {
-          errors && errors.map((message, i) => (
-            <li key={i}>{message}</li>
-          ))
-        }
+        {errors && errors.map((message, i) => <li key={i}>{message}</li>)}
       </ul>
       <div>
-        <label for="username">
-          Username
-        </label>
+        <label htmlFor="username">Username</label>
         <input
           id="username"
           name="username"
           type="text"
           required
-          onChange={(e) => setUsername(e.target.value)} />
+          onChange={(e) => setUsername(e.target.value)}
+        />
       </div>
       <div>
-        <label for="email">
-          Email
-        </label>
+        <label htmlFor="email">Email</label>
         <input
           id="email"
           name="email"
           type="email"
           required
           placeholder="example@email.com"
-          onChange={(e) => setEmail(e.target.value)} />
+          onChange={(e) => setEmail(e.target.value)}
+        />
       </div>
       <div>
-        <label for="password">
-          Password
-        </label>
+        <label htmlFor="password">Password</label>
         <input
           id="password"
           name="password"
           type="password"
           required
-          onChange={(e) => setPassword(e.target.value)} />
+          onChange={(e) => setPassword(e.target.value)}
+        />
       </div>
       <div>
-        <label for="confirmPassword">
-          Confirm Password
-        </label>
+        <label htmlFor="confirmPassword">Confirm Password</label>
         <input
           id="confirmPassword"
           name="confirmPassword"
           type="password"
           required
-          onChange={(e) => setConfirmPassword(e.target.value)} />
+          onChange={(e) => setConfirmPassword(e.target.value)}
+        />
       </div>
       <button type="submit">Register</button>
       <p>
@@ -87,7 +76,6 @@ function Register({ onLogin, history }) {
       </p>
     </form>
   );
-
 }
 
 export default withRouter(Register);
