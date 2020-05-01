@@ -68,7 +68,7 @@ const user = {
 };
 ```
 
-      1. Add a migration and run `Update-Database`
+3. Add a migration and run `Update-Database`
 
 ## General Notes
 
